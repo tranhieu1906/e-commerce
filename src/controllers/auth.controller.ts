@@ -6,7 +6,6 @@ import Token from "../middlewares/jwt.middleware";
 class Auth {
   showFormRegister(req, res) {
     let error = req.flash("err");
-    console.log("🚀 ~ file: auth.controller.ts:9 ~ Auth ~ showFormRegister ~ error", error)
     res.render("register", { data: error });
   }
   async register(req, res, next) {

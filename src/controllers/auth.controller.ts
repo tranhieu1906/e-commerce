@@ -36,6 +36,10 @@ class Auth {
   showFormLogin(req, res) {
     res.render("login", { data: "" });
   }
+  LogOut(req, res) {
+    res.clearCookie("login");
+    res.redirect(301, "/user/home");
+  }
 
   async login(req, res, next) {
     try {
@@ -53,7 +57,7 @@ class Auth {
             maxAge: 1000 * 60 * 60 * 24,
             httpOnly: true,
           });
-          res.redirect(301, "/home");
+          res.redirect(301, "/user/home");
         } else {
           res.redirect("/auth/login");
         }
@@ -73,21 +77,21 @@ class Auth {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
     });
-    res.redirect("/home");
+    res.redirect("/user/home");
   }
   async loginGoogle(req, res, next) {
     try {
-          let data = {
-            name: req.user.displayName,
-            email: req.user.emails[0].value,
-            passport: Math.random(),
-          };
-          const accessToken = await Token.signAccessToken(data);
-          res.cookie("login", accessToken, {
-            maxAge: 1000 * 60 * 60 * 24,
-            httpOnly: true,
-          });
-          res.redirect("/home");
+      let data = {
+        name: req.user.displayName,
+        email: req.user.emails[0].value,
+        passport: Math.random(),
+      };
+      const accessToken = await Token.signAccessToken(data);
+      res.cookie("login", accessToken, {
+        maxAge: 1000 * 60 * 60 * 24,
+        httpOnly: true,
+      });
+      res.redirect("/user/home");
     } catch (err) {
       next(err);
     }

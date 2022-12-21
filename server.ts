@@ -5,9 +5,10 @@ import bodyParser from "body-parser";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
+import cors from "cors";
 const flash = require("connect-flash");
 import { AuthRoute } from "./src/router/auth.router";
-import { HomeRoute } from "./src/router/home.router";
+import { UserRoute } from "./src/router/user/user.router";
 import Token from "./src/middlewares/jwt.middleware";
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -16,6 +17,7 @@ app.set("view engine", "ejs");
 app.set("views", "./src/views");
 
 app.use(flash());
+app.use(cors());
 app.use(express.static("./src/public"));
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -33,7 +35,7 @@ app.use(passport.authenticate("session"));
 
 app.use("/auth", AuthRoute);
 // , Token.veryfyAccessToken
-app.use("/", HomeRoute);
+app.use("/user", UserRoute);
 
 app.use(function (req, res, next) {
   res.render("404");

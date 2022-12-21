@@ -7,6 +7,8 @@ AuthRoute.get("/register", Auth.showFormRegister);
 AuthRoute.post("/register", Auth.register);
 AuthRoute.get("/login", Auth.showFormLogin);
 AuthRoute.post("/login", Auth.login);
+AuthRoute.get("/logout", Auth.LogOut);
+
 AuthRoute.get(
   "/facebook",
   passport.authenticate("facebook", { scope: "email" })

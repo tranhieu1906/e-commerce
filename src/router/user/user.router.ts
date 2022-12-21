@@ -9,10 +9,17 @@ import whiteList from "../../controllers/user/whiteList.controller";
 
 UserRoute.get("/home", Home.showHomePage);
 UserRoute.post("/home", Home.HomePage);
+UserRoute.get("/home/add-cart/:id", Home.showAddCart);
+
 UserRoute.get("/single/product", Product.SingleProduct);
-UserRoute.get("/cart", Cart.showCart);
+
+UserRoute.get("/home/cart-total", Cart.CartTotal);
+UserRoute.get("/home/show-cart", Cart.showCart);
+UserRoute.post("/add/cart/:productId", Cart.addCart);
+
 UserRoute.get("/check-out", checkOut.showCheckOut);
+
 UserRoute.get("/shop-v1", shop.ShowShopV1);
+
 UserRoute.get("/white-list", whiteList.ShowWhiteList);
 UserRoute.get("/white-list-empty", whiteList.ShowWhiteListEmpty);
-

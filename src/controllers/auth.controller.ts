@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { User } from "../schemas/user.schema";
-import { userValidate } from "./validation.controller";
+
 import passport from "../middlewares/passport.middleware";
 import Token from "../middlewares/jwt.middleware";
 class Auth {
@@ -15,18 +15,11 @@ class Auth {
         email: user.email,
       });
       if (checkEmailname) {
-        req.flash("err", "Email đã được đăng ký");
         res.redirect("/auth/register");
       } else {
-        const { error } = userValidate(user);
-        if (error) {
-          res.render("register", { data: error.message });
-        } else {
-          user.password = await bcrypt.hash(user.password, 10);
-          console.log(user);
-          user = await User.create(user);
-          res.redirect(301, "/user/login");
-        }
+        user.password = await bcrypt.hash(user.password, 10);
+        user = await User.create(user);
+        res.redirect(301, "/auth/login");
       }
     } catch (err) {
       console.log(err);
@@ -38,6 +31,7 @@ class Auth {
   }
   LogOut(req, res) {
     res.clearCookie("login");
+    res.clearCookie("idUser");
     res.redirect(301, "/user/home");
   }
 

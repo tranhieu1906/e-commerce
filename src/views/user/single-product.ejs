@@ -11,7 +11,6 @@
     <meta name="author" content="">
     <title>Groover - Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more</title>
     <!-- Standard Favicon -->
-    <link href="favicon.ico" rel="shortcut icon">
     <!-- Base Google Font for Web-app -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <!-- Google Fonts for Banners only -->
@@ -39,7 +38,7 @@
 <!-- app -->
 <div id="app">
     <!-- Header -->
-    <%- include("header") %> 
+    <%- include("header") %>
     <!-- Header /- -->
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">
@@ -77,7 +76,7 @@
                         <div class="section-1-title-breadcrumb-rating">
                             <div class="product-title">
                                 <h1>
-                                    <a href="/user/single/product">Casual Hoodie Full Cotton</a>
+                                    <a href="/user/single/product"><%= data.title %> </a>
                                 </h1>
                             </div>
                             <ul class="bread-crumb">
@@ -87,26 +86,20 @@
                                 <li class="has-separator">
                                     <a href="/user/shop-v1">Men's Clothing</a>
                                 </li>
-                                <li class="has-separator">
-                                    <a href="shop-v2-sub-category.html">Tops</a>
-                                </li>
-                                <li class="is-marked">
-                                    <a href="shop-v3-sub-sub-category.html">Hoodies</a>
-                                </li>
                             </ul>
                         </div>
                         <div class="section-2-short-description u-s-p-y-14">
                             <h6 class="information-heading u-s-m-b-8">Description:</h6>
-                            <p>This hoodie is full cotton. It includes a muff sewn onto the lower front, and (usually) a drawstring to adjust the hood opening. Throughout the U.S., it is common for middle-school, high-school, and college students to wear this sweatshirts—with or without hoods—that display their respective school names or mascots across the chest, either as part of a uniform or personal preference.
+                            <p><%= data.description %>
                             </p>
                         </div>
                         <div class="section-3-price-original-discount u-s-p-y-14">
                             <div class="price">
-                                <h4>$55.00</h4>
+                                <h4><%= data.price.toLocaleString('it-IT', { style: 'currency' , currency: 'VND' , }) %></h4>
                             </div>
                         </div>
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
-                            <form action="#" class="post-form">
+                            <form action=<%= `/user/add/cart/${data._id}` %> class="post-form" method="post">
                                 <div class="quick-social-media-wrapper u-s-m-b-22">
                                     <span>Share:</span>
                                     <ul class="social-media-list">
@@ -148,7 +141,6 @@
                                 <div>
                                     <button class="button button-outline-secondary" type="submit">Add to cart</button>
                                     <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
-                                    
                                 </div>
                             </form>
                         </div>

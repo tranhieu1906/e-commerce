@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import passport from "passport";
 import cors from "cors";
 const flash = require("connect-flash");
+import JWT from "jsonwebtoken";
 import { AuthRoute } from "./src/router/auth.router";
 import { UserRoute } from "./src/router/user/user.router";
 import Token from "./src/middlewares/jwt.middleware";
@@ -35,6 +36,22 @@ app.use(passport.authenticate("session"));
 
 app.use("/auth", AuthRoute);
 // , Token.veryfyAccessToken
+app.use((req: any, res, next) => {
+  const token = req.cookies.login;
+  const idUser = req.cookies.idUser;
+  JWT.verify(token, process.env.SECRET_KEY, (err, payload) => {
+    req.payload = payload;
+    if (payload) {
+      res.cookie("idUser", payload.data._id, {
+        maxAge: 900000,
+        httpOnly: true,
+      });
+    }
+    req.login = payload;
+  });
+  req.idUser = idUser;
+  next();
+});
 app.use("/user", UserRoute);
 
 app.use(function (req, res, next) {

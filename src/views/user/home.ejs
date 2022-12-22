@@ -108,7 +108,7 @@
                       <% product.forEach((element,index)=>{ %>
                         <div class="item">
                           <div class="image-container">
-                            <a class="item-img-wrapper-link" href="/user/single/product">
+                            <a class="item-img-wrapper-link" href=<%= `/user/single/product/${element._id}`  %>  >
                               <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
                             </a>
                             <div class="item-action-behaviors">
@@ -123,7 +123,7 @@
                           <div class="item-content">
                             <div class="what-product-is">
                               <h6 class="item-title">
-                                <a href="/user/single/product">
+                                <a href=<%= `/user/single/product/${element._id}`  %>>
                                   <%= element.title %>
                                 </a>
                               </h6>
@@ -156,203 +156,6 @@
                   </div>
                   <!-- Product Not Found /- -->
                 </div>
-                <div class="tab-pane fade" id="men-top-rating-products">
-                  <div class="slider-fouc">
-                    <div class="products-slider owl-carousel" data-item="4">
-                      <div class="item">
-                        <div class="image-container">
-                          <a class="item-img-wrapper-link" href="/user/single/product">
-                            <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
-                          </a>
-                          <div class="item-action-behaviors">
-                            <a class="item-addCart" data-toggle="modal" href="#quick-view">Add to Cart
-                            </a>
-
-                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
-                          </div>
-                        </div>
-                        <div class="item-content">
-                          <div class="what-product-is">
-                            <ul class="bread-crumb">
-                              <li class="has-separator">
-                                <a href="/user/shop-v1">Men's</a>
-                              </li>
-                              <li class="has-separator">
-                                <a href="shop-v2-sub-category.html">Tops</a>
-                              </li>
-                              <li>
-                                <a href="shop-v3-sub-sub-category.html">Suits</a>
-                              </li>
-                            </ul>
-                            <h6 class="item-title">
-                              <a href="/user/single/product">Black Maire Full Men Suit</a>
-                            </h6>
-                            <div class="item-stars">
-                              <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                <span style='width:67px'></span>
-                              </div>
-                              <span>(23)</span>
-                            </div>
-                          </div>
-                          <div class="price-template">
-                            <div class="item-new-price">
-                              $55.00
-                            </div>
-                            <div class="item-old-price">
-                              $60.00
-                            </div>
-                          </div>
-                        </div>
-                        <div class="tag sale">
-                          <span>SALE</span>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="image-container">
-                          <a class="item-img-wrapper-link" href="/user/single/product">
-                            <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
-                          </a>
-                          <div class="item-action-behaviors">
-                            <a class="item-addCart" data-toggle="modal" href="#quick-view">Add to Cart
-                            </a>
-
-                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
-                          </div>
-                        </div>
-                        <div class="item-content">
-                          <div class="what-product-is">
-                            <ul class="bread-crumb">
-                              <li class="has-separator">
-                                <a href="/user/shop-v1">Men's</a>
-                              </li>
-                              <li class="has-separator">
-                                <a href="shop-v2-sub-category.html">Outwear</a>
-                              </li>
-                              <li>
-                                <a href="shop-v3-sub-sub-category.html">Jackets</a>
-                              </li>
-                            </ul>
-                            <h6 class="item-title">
-                              <a href="/user/single/product">Woodsmoke Rookie Parka Jacket</a>
-                            </h6>
-                            <div class="item-stars">
-                              <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                <span style='width:67px'></span>
-                              </div>
-                              <span>(23)</span>
-                            </div>
-                          </div>
-                          <div class="price-template">
-                            <div class="item-new-price">
-                              $55.00
-                            </div>
-                            <div class="item-old-price">
-                              $60.00
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="image-container">
-                          <a class="item-img-wrapper-link" href="/user/single/product">
-                            <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
-                          </a>
-                          <div class="item-action-behaviors">
-                            <a class="item-addCart" data-toggle="modal" href="#quick-view">Add to Cart
-                            </a>
-
-                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
-                          </div>
-                        </div>
-                        <div class="item-content">
-                          <div class="what-product-is">
-                            <ul class="bread-crumb">
-                              <li class="has-separator">
-                                <a href="/user/shop-v1">Men's</a>
-                              </li>
-                              <li class="has-separator">
-                                <a href="shop-v2-sub-category.html">Accessories</a>
-                              </li>
-                              <li>
-                                <a href="shop-v3-sub-sub-category.html">Ties</a>
-                              </li>
-                            </ul>
-                            <h6 class="item-title">
-                              <a href="/user/single/product">Blue Zodiac Boxes Reg Tie</a>
-                            </h6>
-                            <div class="item-stars">
-                              <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                <span style='width:67px'></span>
-                              </div>
-                              <span>(23)</span>
-                            </div>
-                          </div>
-                          <div class="price-template">
-                            <div class="item-new-price">
-                              $55.00
-                            </div>
-                            <div class="item-old-price">
-                              $60.00
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="image-container">
-                          <a class="item-img-wrapper-link" href="/user/single/product">
-                            <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
-                          </a>
-                          <div class="item-action-behaviors">
-                            <a class="item-addCart" data-toggle="modal" href="#quick-view">Add to Cart
-                            </a>
-
-                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
-                          </div>
-                        </div>
-                        <div class="item-content">
-                          <div class="what-product-is">
-                            <ul class="bread-crumb">
-                              <li class="has-separator">
-                                <a href="/user/shop-v1">Men's</a>
-                              </li>
-                              <li class="has-separator">
-                                <a href="shop-v2-sub-category.html">Bottoms</a>
-                              </li>
-                              <li>
-                                <a href="shop-v3-sub-sub-category.html">Shoes</a>
-                              </li>
-                            </ul>
-                            <h6 class="item-title">
-                              <a href="/user/single/product">Zambezi Carved Leather Business Casual Shoes
-                              </a>
-                            </h6>
-                            <div class="item-stars">
-                              <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                <span style='width:67px'></span>
-                              </div>
-                              <span>(23)</span>
-                            </div>
-                          </div>
-                          <div class="price-template">
-                            <div class="item-new-price">
-                              $55.00
-                            </div>
-                            <div class="item-old-price">
-                              $60.00
-                            </div>
-                          </div>
-                        </div>
-                        <div class="tag discount">
-                          <span>-15%</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <div class="tab-pane fade" id="men-featured-products">
                   <!-- Product Not Found -->
                   <div class="product-not-found">
@@ -368,6 +171,11 @@
           </div>
         </div>
       </section>
+      <div class="redirect-link-wrapper text-center u-s-p-t-25 u-s-p-b-80">
+        <a class="redirect-link" href="/user/shop-v1">
+          <span>View more on product</span>
+        </a>
+      </div>
       <!-- Men-Clothing-Timing-Section -->
       <section class="section-maker">
         <div class="container">
@@ -406,202 +214,6 @@
             <!-- Timing-Box /- -->
           </div>
           <!-- Carousel -->
-          <div class="slider-fouc">
-            <div class="products-slider owl-carousel" data-item="4">
-              <div class="item">
-                <div class="image-container">
-                  <a class="item-img-wrapper-link" href="/user/single/product">
-                    <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
-                  </a>
-                  <div class="item-action-behaviors">
-                    <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-
-                    <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
-                  </div>
-                </div>
-                <div class="item-content">
-                  <div class="what-product-is">
-                    <ul class="bread-crumb">
-                      <li class="has-separator">
-                        <a href="/user/shop-v1">Men's</a>
-                      </li>
-                      <li class="has-separator">
-                        <a href="shop-v2-sub-category.html">Outwear</a>
-                      </li>
-                      <li>
-                        <a href="shop-v3-sub-sub-category.html">Jackets</a>
-                      </li>
-                    </ul>
-                    <h6 class="item-title">
-                      <a href="/user/single/product">Maire Battlefield Jeep Men's Jacket</a>
-                    </h6>
-                    <div class="item-stars">
-                      <div class='star' title="0 out of 5 - based on 0 Reviews">
-                        <span style='width:0'></span>
-                      </div>
-                      <span>(0)</span>
-                    </div>
-                  </div>
-                  <div class="price-template">
-                    <div class="item-new-price">
-                      $55.00
-                    </div>
-                    <div class="item-old-price">
-                      $60.00
-                    </div>
-                  </div>
-                </div>
-                <div class="tag hot">
-                  <span>HOT</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="image-container">
-                  <a class="item-img-wrapper-link" href="/user/single/product">
-                    <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
-                  </a>
-                  <div class="item-action-behaviors">
-                    <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-
-                    <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
-                  </div>
-                </div>
-                <div class="item-content">
-                  <div class="what-product-is">
-                    <ul class="bread-crumb">
-                      <li class="has-separator">
-                        <a href="/user/shop-v1">Men's</a>
-                      </li>
-                      <li class="has-separator">
-                        <a href="shop-v2-sub-category.html">Outwear</a>
-                      </li>
-                      <li>
-                        <a href="shop-v3-sub-sub-category.html">Jackets</a>
-                      </li>
-                    </ul>
-                    <h6 class="item-title">
-                      <a href="/user/single/product">Fern Green Men's Jacket</a>
-                    </h6>
-                    <div class="item-stars">
-                      <div class='star' title="0 out of 5 - based on 0 Reviews">
-                        <span style='width:0'></span>
-                      </div>
-                      <span>(0)</span>
-                    </div>
-                  </div>
-                  <div class="price-template">
-                    <div class="item-new-price">
-                      $55.00
-                    </div>
-                    <div class="item-old-price">
-                      $60.00
-                    </div>
-                  </div>
-                </div>
-                <div class="tag hot">
-                  <span>HOT</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="image-container">
-                  <a class="item-img-wrapper-link" href="/user/single/product">
-                    <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
-                  </a>
-                  <div class="item-action-behaviors">
-                    <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-
-                    <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
-                  </div>
-                </div>
-                <div class="item-content">
-                  <div class="what-product-is">
-                    <ul class="bread-crumb">
-                      <li class="has-separator">
-                        <a href="/user/shop-v1">Men's</a>
-                      </li>
-                      <li class="has-separator">
-                        <a href="shop-v2-sub-category.html">Sunglasses</a>
-                      </li>
-                      <li>
-                        <a href="shop-v3-sub-sub-category.html">Round</a>
-                      </li>
-                    </ul>
-                    <h6 class="item-title">
-                      <a href="/user/single/product">Brown Dark Tan Round Double Bridge Sunglasses</a>
-                    </h6>
-                    <div class="item-stars">
-                      <div class='star' title="0 out of 5 - based on 0 Reviews">
-                        <span style='width:0'></span>
-                      </div>
-                      <span>(0)</span>
-                    </div>
-                  </div>
-                  <div class="price-template">
-                    <div class="item-new-price">
-                      $55.00
-                    </div>
-                    <div class="item-old-price">
-                      $60.00
-                    </div>
-                  </div>
-                </div>
-                <div class="tag hot">
-                  <span>HOT</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="image-container">
-                  <a class="item-img-wrapper-link" href="/user/single/product">
-                    <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
-                  </a>
-                  <div class="item-action-behaviors">
-                    <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-
-                    <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
-                  </div>
-                </div>
-                <div class="item-content">
-                  <div class="what-product-is">
-                    <ul class="bread-crumb">
-                      <li class="has-separator">
-                        <a href="/user/shop-v1">Men's</a>
-                      </li>
-                      <li class="has-separator">
-                        <a href="shop-v2-sub-category.html">Sunglasses</a>
-                      </li>
-                      <li>
-                        <a href="shop-v3-sub-sub-category.html">Round</a>
-                      </li>
-                    </ul>
-                    <h6 class="item-title">
-                      <a href="/user/single/product">Black Round Double Bridge Sunglasses</a>
-                    </h6>
-                    <div class="item-stars">
-                      <div class='star' title="0 out of 5 - based on 0 Reviews">
-                        <span style='width:0'></span>
-                      </div>
-                      <span>(0)</span>
-                    </div>
-                  </div>
-                  <div class="price-template">
-                    <div class="item-new-price">
-                      $55.00
-                    </div>
-                    <div class="item-old-price">
-                      $60.00
-                    </div>
-                  </div>
-                </div>
-                <div class="tag hot">
-                  <span>HOT</span>
-                </div>
-              </div>
-            </div>
-          </div>
           <!-- Carousel /- -->
         </div>
       </section>
@@ -615,11 +227,7 @@
                 style="width: 1110px !important; height: 236px; object-fit: cover;">
             </a>
           </div>
-          <div class="redirect-link-wrapper text-center u-s-p-t-25 u-s-p-b-80">
-            <a class="redirect-link" href="store-directory.html">
-              <span>View more on this category</span>
-            </a>
-          </div>
+          
         </div>
       </div>
       <!-- Banner-Image & View-more /- -->

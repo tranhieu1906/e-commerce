@@ -11,13 +11,17 @@ UserRoute.get("/home", Home.showHomePage);
 UserRoute.post("/home", Home.HomePage);
 UserRoute.get("/home/add-cart/:id", Home.showAddCart);
 
-UserRoute.get("/single/product", Product.SingleProduct);
+UserRoute.get("/single/product/:id", Product.SingleProduct);
 
 UserRoute.get("/home/cart-total", Cart.CartTotal);
 UserRoute.get("/home/show-cart", Cart.showCart);
+UserRoute.get("/cart", Cart.Carts);
+UserRoute.post("/save-cart/:productId", Cart.saveCart);
+UserRoute.get("/delete-cart/:productId", Cart.deleteCart);
 UserRoute.post("/add/cart/:productId", Cart.addCart);
 
 UserRoute.get("/check-out", checkOut.showCheckOut);
+UserRoute.post("/check-out", checkOut.checkOut);
 
 UserRoute.get("/shop-v1", shop.ShowShopV1);
 

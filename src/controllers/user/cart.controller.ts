@@ -43,16 +43,17 @@ class Carts {
     );
     let total = 0;
     let totalProduct = 0;
-    if (cart){
+    if (cart) {
       for (let i = 0; i < cart.items.length; i++) {
         const item = cart.items[i];
+        console.log(item);
         //@ts-ignore
         const price = item.product.price;
         const quantity = item.quantity;
         totalProduct += item.quantity;
         total += price * quantity;
       }
-    res.json({ message: "Total!", data: total, totalProduct: totalProduct });
+      res.json({ message: "Total!", data: total, totalProduct: totalProduct });
     }
   }
   async Carts(req, res) {
@@ -99,7 +100,6 @@ class Carts {
   async saveCart(req, res) {
     try {
       let arr = Object.values(req.body);
-      console.log(req.body); 
       const cart = await Cart.findOne({ user: req.cookies.idUser });
       for (let i = 0; i < arr.length; i++) {
         const item = cart.items.find(

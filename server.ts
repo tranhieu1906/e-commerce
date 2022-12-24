@@ -8,8 +8,10 @@ import passport from "passport";
 import cors from "cors";
 const flash = require("connect-flash");
 import JWT from "jsonwebtoken";
+import multer from "multer";
 import { AuthRoute } from "./src/router/auth.router";
 import { UserRoute } from "./src/router/user/user.router";
+import { AdminRoute } from "./src/router/admin/admin.router";
 import Token from "./src/middlewares/jwt.middleware";
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -53,6 +55,8 @@ app.use((req: any, res, next) => {
   next();
 });
 app.use("/user", UserRoute);
+
+app.use("/admin", Token.checkRole, AdminRoute);
 
 app.use(function (req, res, next) {
   res.render("404");

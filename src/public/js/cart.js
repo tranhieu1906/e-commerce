@@ -7,7 +7,7 @@ async function showCart(id) {
     let html = "";
     data.forEach((element, index) => {
       html += `<li class="clearfix">
-                    <a href="/user/single/product">
+                    <a href="/user/single/product/${element.product._id}">
                         <img src="/images/product/product@1x.jpg" alt="Product">
                         <span class="mini-item-name">${
                           element.product.title

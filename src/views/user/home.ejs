@@ -109,7 +109,7 @@
                         <div class="item">
                           <div class="image-container">
                             <a class="item-img-wrapper-link" href=<%= `/user/single/product/${element._id}`  %>  >
-                              <img loading="lazy" class="img-fluid" src="/images/product/product3x.jpeg" alt="Product">
+                              <img loading="lazy" class="img-fluid" src="<%= element.image %> " alt="Product" style="object-fit: cover;height: 250px;">
                             </a>
                             <div class="item-action-behaviors">
                               <a class="item-addCart" data-toggle="modal" href="#quick-view" <%-

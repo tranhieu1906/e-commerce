@@ -50,6 +50,22 @@ class Token {
       next();
     });
   }
+  async checkRole(req, res, next) {
+    try {
+      const token = req.cookies.login;
+
+      const decoded = JWT.verify(token, process.env.SECRET_KEY);
+      // @ts-ignore
+      const userRole = decoded.data.role;
+      if (userRole === "admin") {
+        next();
+      } else {
+        res.redirect("/auth/login")
+      }
+    } catch (error) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+  }
 }
 
 export default new Token();

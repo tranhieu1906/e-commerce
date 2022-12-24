@@ -9,8 +9,12 @@ async function myFunction(id, idUser) {
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <!-- Product-zoom-area -->
                   <div class="zoom-area">
-                    <img loading="lazy" id="zoom-pro-quick-view" class="img-fluid" src="/images/product/product@4x.jpg"
-                      data-zoom-image="/images/product/product@4x.jpg" alt="Zoom Image">
+                    <img loading="lazy" id="zoom-pro-quick-view" class="img-fluid" src="${
+                      response.data.image
+                    }"
+                      data-zoom-image="${
+                        response.data.image
+                      }" alt="Zoom Image" >
                   </div>
                   <!-- Product-zoom-area /- -->
                 </div>

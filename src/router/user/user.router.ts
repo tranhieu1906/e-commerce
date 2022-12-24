@@ -8,7 +8,7 @@ import shop from "../../controllers/user/shop.controller";
 import whiteList from "../../controllers/user/whiteList.controller";
 import Token from "../../middlewares/jwt.middleware";
 
-UserRoute.get("/home", Home.showHomePage);
+UserRoute.get("/", Home.showHomePage);
 UserRoute.post("/home", Home.HomePage);
 UserRoute.get("/home/add-cart/:id", Home.showAddCart);
 

@@ -576,7 +576,7 @@
     async function total(){
       try {
         const { data: response } = await axios.get(
-          `http://localhost:3000/user/home/cart-total`
+          `http://localhost:3000//cart-total`
         );
         let html = `<i class="ion ion-md-basket"></i>
                 <span class="item-counter">${response.totalProduct}</span>

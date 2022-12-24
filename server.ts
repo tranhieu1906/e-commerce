@@ -54,7 +54,7 @@ app.use((req: any, res, next) => {
   req.idUser = idUser;
   next();
 });
-app.use("/user", UserRoute);
+app.use("/", UserRoute);
 
 app.use("/admin", Token.checkRole, AdminRoute);
 

@@ -1,3 +1,5 @@
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <header>
     <!-- Top-Header -->
     <div class="full-layer-outer-header">
@@ -30,7 +32,7 @@
                                     My Cart</a>
                             </li>
                             <li>
-                                <a href="wishlist.html">
+                                <a href="/user/wish-list">
                                     <i class="far fa-heart u-s-m-r-9"></i>
                                     My Wishlist</a>
                             </li>
@@ -63,7 +65,7 @@
             <div class="row clearfix align-items-center">
                 <div class="col-lg-3 col-md-9 col-sm-6">
                     <div class="brand-logo text-lg-center">
-                        <a href="/">
+                        <a href="/user/home">
                             <img src="/images/main-logo/groover-branding-1.png" alt="Groover Brand Logo"
                                 class="app-brand-logo">
                         </a>
@@ -72,7 +74,7 @@
                 <div class="col-lg-5 u-d-none-lg">
                     <form class="form-searchbox">
                         <label class="sr-only" for="search-landscape">Search</label>
-                        <input id="search-landscape" type="text" class="text-field" placeholder="Search everything">
+                        <input id="search-landscapes" type="text" class="text-field" placeholder="Search everything">
                         <div class="select-box-position">
                             <div class="select-box-wrapper select-hide">
                                 <label class="sr-only" for="select-category">Choose category for search</label>
@@ -84,7 +86,7 @@
                                 </select>
                             </div>
                         </div>
-                        <button id="btn-search" type="submit" class="button button-primary fas fa-search"></button>
+                        <button id="btn-search" type="button" class="button button-primary fas fa-search" style="transform: translateY(-50%);" onclick="searchProduct()"></button>
                     </form>
                 </div>
                 <div class="col-lg-4 col-md-3 col-sm-6">
@@ -96,7 +98,7 @@
                                 </a>
                             </li>
                             <li class="u-d-none-lg">
-                                <a href="wishlist.html">
+                                <a href="/user/wish-list">
                                     <i class="far fa-heart"></i>
                                 </a>
                             </li>
@@ -117,7 +119,7 @@
             <button type="button" class="button fas fa-search" id="responsive-search"></button>
         </div>
         <div class="fixed-responsive-wrapper">
-            <a href="wishlist.html">
+            <a href="/user/wish-list">
                 <i class="far fa-heart"></i>
                 <span class="fixed-item-counter">4</span>
             </a>
@@ -334,3 +336,31 @@
     <!-- Bottom-Header /- -->
 </header>
 <script src="/js/cart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#search-landscapes").autocomplete({
+            source: function (req, res) {
+                $.ajax({
+                    url: "http://localhost:3000/user/auto-complete",
+                    dataType: "jsonp",
+                    type: "GET",
+                    data: req,
+                    success: function (data) {
+                        res(data)
+                    },
+                    error: function (error) {
+                        console.log(error.status);
+                    }
+                })
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                if (ui.item) {
+                    $("#search-landscapes").text(ui.item.label);
+                }
+            }
+        });
+    })
+</script>

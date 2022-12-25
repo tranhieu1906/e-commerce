@@ -46,7 +46,6 @@ class Carts {
     if (cart) {
       for (let i = 0; i < cart.items.length; i++) {
         const item = cart.items[i];
-        console.log(item);
         //@ts-ignore
         const price = item.product.price;
         const quantity = item.quantity;

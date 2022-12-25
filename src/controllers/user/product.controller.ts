@@ -13,5 +13,12 @@ class Products {
       data: dataProduct,
     });
   }
+  async SearchProduct(req,res){
+    let product = await Product.find({
+      title: { $regex: req.query.title, $options: "i" },
+    });
+    console.log(product);
+    res.status(200).json(product);
+  }
 }
 export default new Products();

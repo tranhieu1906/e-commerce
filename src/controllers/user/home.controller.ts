@@ -10,7 +10,7 @@ class HomeUser {
     const idUser = req.cookies.idUser;
     JWT.verify(token, process.env.SECRET_KEY, (err, payload) => {
       req.payload = payload;
-      if (payload){
+      if (payload) {
         res.cookie("idUser", payload.data._id, {
           maxAge: 900000,
           httpOnly: true,
@@ -19,7 +19,7 @@ class HomeUser {
       res.render("user/home", {
         login: payload,
         product: product,
-        idUser: idUser
+        idUser: idUser,
       });
     });
   }
@@ -29,6 +29,29 @@ class HomeUser {
   async showAddCart(req, res) {
     let product = await Product.findOne({ _id: req.params.id });
     res.json({ message: "Request received!", data: product });
+  }
+  autocomplete(req, res) {
+    let regex = new RegExp(req.query["term"], "i");
+    let productFilter = Product.find({ title: regex }, { title: 1 })
+      .sort({
+        createdAt: -1,
+      })
+      .limit(6);
+    productFilter.exec((err, data) => {
+      let result = [];
+      if (!err) {
+        if (data && data.length && data.length > 0) {
+          data.forEach((product) => {
+            let obj = {
+              id: product._id,
+              label: product.title,
+            };
+            result.push(obj);
+          });
+        }
+        res.jsonp(result);
+      }
+    });
   }
 }
 export default new HomeUser();

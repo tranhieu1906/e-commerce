@@ -12,6 +12,7 @@
 	<!----css3---->
 	<link rel="stylesheet" href="/css/custom.css">
 
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
 	<!--google fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,94 +43,19 @@
 				<li class="active">
 					<a href="#" class="dashboard"><i class="material-icons">dashboard</i>dashboard </a>
 				</li>
-
-				<li class="dropdown">
-					<a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-						<i class="material-icons">aspect_ratio</i>Layouts
-					</a>
-					<ul class="collapse list-unstyled menu" id="homeSubmenu1">
-						<li><a href="#">layout 1</a></li>
-						<li><a href="#">layout 2</a></li>
-						<li><a href="#">layout 3</a></li>
-					</ul>
-				</li>
-
-
-				<li class="dropdown">
-					<a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-						<i class="material-icons">apps</i>widgets
-					</a>
-					<ul class="collapse list-unstyled menu" id="homeSubmenu2">
-						<li><a href="#">Apps 1</a></li>
-						<li><a href="#">Apps 2</a></li>
-						<li><a href="#">Apps 3</a></li>
-					</ul>
-				</li>
-
 				<li class="dropdown">
 					<a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-						<i class="material-icons">equalizer</i>charts
+						<i class="material-icons">equalizer</i>Mangager
 					</a>
 					<ul class="collapse list-unstyled menu" id="homeSubmenu3">
-						<li><a href="#">Pages 1</a></li>
-						<li><a href="#">Pages 2</a></li>
-						<li><a href="#">Pages 3</a></li>
+						<li><a href="/admin/user">Mangager User</a></li>
+						<!-- <li><a href="#">Pages 2</a></li>
+						<li><a href="#">Pages 3</a></li> -->
 					</ul>
 				</li>
 
 
-				<li class="dropdown">
-					<a href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-						<i class="material-icons">extension</i>UI Element
-					</a>
-					<ul class="collapse list-unstyled menu" id="homeSubmenu4">
-						<li><a href="#">Pages 1</a></li>
-						<li><a href="#">Pages 2</a></li>
-						<li><a href="#">Pages 3</a></li>
-					</ul>
-				</li>
 
-				<li class="dropdown">
-					<a href="#homeSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-						<i class="material-icons">border_color</i>forms
-					</a>
-					<ul class="collapse list-unstyled menu" id="homeSubmenu5">
-						<li><a href="#">Pages 1</a></li>
-						<li><a href="#">Pages 2</a></li>
-						<li><a href="#">Pages 3</a></li>
-					</ul>
-				</li>
-
-				<li class="dropdown">
-					<a href="#homeSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-						<i class="material-icons">grid_on</i>tables
-					</a>
-					<ul class="collapse list-unstyled menu" id="homeSubmenu6">
-						<li><a href="#">table 1</a></li>
-						<li><a href="#">table 2</a></li>
-						<li><a href="#">table 3</a></li>
-					</ul>
-				</li>
-
-
-				<li class="dropdown">
-					<a href="#homeSubmenu7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-						<i class="material-icons">content_copy</i>Pages
-					</a>
-					<ul class="collapse list-unstyled menu" id="homeSubmenu7">
-						<li><a href="#">Pages 1</a></li>
-						<li><a href="#">Pages 2</a></li>
-						<li><a href="#">Pages 3</a></li>
-					</ul>
-				</li>
-
-
-				<li class="">
-					<a href="#" class=""><i class="material-icons">date_range</i>copy </a>
-				</li>
-				<li class="">
-					<a href="#" class=""><i class="material-icons">library_books</i>calender </a>
-				</li>
 
 			</ul>
 		</div>
@@ -155,15 +81,13 @@
 
 						<div class="col-md-5 col-lg-3 order-3 order-md-2">
 							<div class="xp-searchbar">
-								<form>
-									<div class="input-group">
-										<input type="search" class="form-control" placeholder="Search">
+									<div class="input-group ui-widget">
+										<input id="tags" class="form-control" name="search">
 										<div class="input-group-append">
-											<button class="btn" type="submit" id="button-addon2">Go
+											<button class="btn" id="button-addon2" onclick="search()">Go
 											</button>
 										</div>
 									</div>
-								</form>
 							</div>
 						</div>
 
@@ -274,7 +198,7 @@
 									</tr>
 								</thead>
 
-								<tbody>
+								<tbody id="products">
 									<% product.forEach((element,index)=>{ %>
 										<tr>
 											<th><span class="custom-checkbox">
@@ -310,22 +234,24 @@
 											</th>
 										</tr>
 										<% }) %>
-
 								</tbody>
-
-
 							</table>
 
 							<div class="clearfix">
 								<div class="hint-text">showing <b>5</b> out of <b>25</b></div>
 								<ul class="pagination">
-									<li class="page-item disabled"><a href="#">Previous</a></li>
-									<li class="page-item active"><a href="#" class="page-link">1</a></li>
-									<li class="page-item "><a href="#" class="page-link">2</a></li>
-									<li class="page-item "><a href="#" class="page-link">3</a></li>
-									<li class="page-item "><a href="#" class="page-link">4</a></li>
-									<li class="page-item "><a href="#" class="page-link">5</a></li>
-									<li class="page-item "><a href="#" class="page-link">Next</a></li>
+									<% let i %>
+										<li class="page-item disabled"><a
+												href="/admin?page=<%= page - 1 %> ">Previous</a></li>
+										<% for(i=1 ; i <=totalPages; i++){ %>
+											<li class="page-item "><button class="page-link" <%-
+													`onclick="changePage(${i})" `%>>
+													<%= i %>
+												</button></li>
+											<% } %>
+												<li class="page-item "><a href="/admin?page=<%= page + 1 %>"
+														class="page-link">Next</a></li>
+
 								</ul>
 							</div>
 						</div>
@@ -466,7 +392,8 @@
 
 
 
-
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
 		async function deleteProduct() {
 			if (confirm("are you sure you want to delete?") == true) {
@@ -486,16 +413,124 @@
 				checkboxes[i].checked = source.checked;
 			}
 		}
+		async function changePage(i) {
+			const { data: response } = await axios.put(`http://localhost:3000/admin?page=${i}`)
+			let html = ""
+			response.data.forEach((element, index) => {
+				html += `<tr>
+												<th><span class="custom-checkbox">
+														<input type="checkbox" id="checkbox1" name="foo"
+															value="${element._id}">
+														<label for="checkbox1"></label>
+												</th>
+												<th>
+													<img src="${element.image}" class="rounded shadow-sm"
+														style="width: 66px; height: 66px;">
+												</th>
+												<th>
+													${element.title}
+												</th>
+												<th style="max-width: 200px; display:inline-block ;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;"
+													class="pt-4">
+													${element.description}
+												</th>
+												<th>
+													${element.price.toLocaleString("it-IT", {
+					style: "currency",
+					currency: "VND",
+				})}
+												</th>
+
+												<th>
+													<a href="/admin/edit/${element._id}" class="edit" >
+														<i class="material-icons" data-toggle="tooltip"
+															title="Edit">&#xE254;</i>
+													</a>
+													<a href="/admin/delete/${element._id}"class="delete" >
+					<i class="material-icons" onclick = "return confirm('are you sure you want to delete?')">&#xE872;</i>
+													</a>
+												</th>
+											</tr> `
+			})
+			document.getElementById("products").innerHTML = html;
+		}
+		async function search() {
+			let values = document.getElementById("tags").value
+			const response = await axios.get(`http://localhost:3000/admin/search?title=${values}`)
+			let html = ""
+			response.data.forEach((element, index) => {
+				html += `<tr>
+												<th><span class="custom-checkbox">
+														<input type="checkbox" id="checkbox1" name="foo"
+															value="${element._id}">
+														<label for="checkbox1"></label>
+												</th>
+												<th>
+													<img src="${element.image}" class="rounded shadow-sm"
+														style="width: 66px; height: 66px;">
+												</th>
+												<th>
+													${element.title}
+												</th>
+												<th style="max-width: 200px; display:inline-block ;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;"
+													class="pt-4">
+													${element.description}
+												</th>
+												<th>
+													${element.price.toLocaleString("it-IT", {
+					style: "currency",
+					currency: "VND",
+				})}
+												</th>
+
+												<th>
+													<a href="/admin/edit/${element._id}" class="edit" >
+														<i class="material-icons" data-toggle="tooltip"
+															title="Edit">&#xE254;</i>
+													</a>
+													<a href="/admin/delete/${element._id}"class="delete" >
+					<i class="material-icons" onclick = "return confirm('are you sure you want to delete?')">&#xE872;</i>
+													</a>
+												</th>
+											</tr> `
+			})
+			document.getElementById("products").innerHTML = html;
+		}
 	</script>
+	<script>
+		$(function () {
+			$("#tags").autocomplete({
+				source: function (req, res) {
+					$.ajax({
+						url: "http://localhost:3000/admin/auto-complete",
+						dataType: "jsonp",
+						type: "GET",
+						data: req,
+						success: function (data) {
+							res(data)
+						},
+						error: function (error) {
+							console.log(error.status);
+						}
+					})
+				},
+				minLength: 1,
+				select: function (event, ui) {
+					if (ui.item) {
+						$("#tags").text(ui.item.label);
+					}
+				}
+			});
+		})
+	</script>
+
 	<!-- Optional JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
 		integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="/js/jquery-3.3.1.slim.min.js"></script>
 	<script src="/js/popper.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/jquery-3.3.1.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function () {

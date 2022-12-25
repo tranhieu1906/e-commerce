@@ -20,8 +20,15 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 AdminRoute.get("/", HomeAdmin.showHome);
+AdminRoute.put("/", HomeAdmin.page);
 AdminRoute.post("/add-product", upload.single("image"), HomeAdmin.addProduct);
 AdminRoute.get("/delete/:id", HomeAdmin.deleteProduct);
 AdminRoute.post("/delete-many", HomeAdmin.deleteManyProducts);
-AdminRoute.get("/edit/:id", HomeAdmin.editProduct);
+AdminRoute.get("/edit/:id", HomeAdmin.showEditProduct);
+AdminRoute.post("/edit/:id", upload.single("file"), HomeAdmin.updateProduct);
+AdminRoute.get("/user", HomeAdmin.userPage);
+AdminRoute.get("/user/delete-many", HomeAdmin.deleteManyUser);
+AdminRoute.get("/auto-complete", HomeAdmin.autocomplete);
+AdminRoute.get("/search", HomeAdmin.searchProduct);
+
 

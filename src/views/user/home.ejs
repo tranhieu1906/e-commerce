@@ -31,9 +31,16 @@
   <link rel="stylesheet" href="/css/utility.css">
   <!-- Main -->
   <link rel="stylesheet" href="/css/bundle.css">
+
+  <style>
+    .activeWishList {
+      color: #ffffff;
+      background-color: #d90429;
+    }
+  </style>
 </head>
 
-<body onload="total()" >
+<body onload="total()">
 
   <!-- app -->
   <div id="app">
@@ -108,22 +115,22 @@
                       <% product.forEach((element,index)=>{ %>
                         <div class="item">
                           <div class="image-container">
-                            <a class="item-img-wrapper-link" href=<%= `/user/single/product/${element._id}`  %>  >
-                              <img loading="lazy" class="img-fluid" src="<%= element.image %> " alt="Product" style="object-fit: cover;height: 250px;">
+                            <a class="item-img-wrapper-link" href=<%=`/user/single/product/${element._id}` %> >
+                              <img loading="lazy" class="img-fluid" src="<%= element.image %> " alt="Product"
+                                style="object-fit: cover;height: 250px;">
                             </a>
                             <div class="item-action-behaviors">
                               <a class="item-addCart" data-toggle="modal" href="#quick-view" <%-
-                                `onclick="myFunction('${element._id}')"`%>>Add to Cart
+                                `onclick="myFunction('${element._id}')" `%>>Add to Cart
                               </a>
-
-                              <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-
+                              <a class="item-addwishlist" id="addwishlist" href="javascript:void(0)" <%-
+                                `onclick="whishList('${element._id}')" `%>>Add to Wishlist</a>
                             </div>
                           </div>
                           <div class="item-content">
                             <div class="what-product-is">
                               <h6 class="item-title">
-                                <a href=<%= `/user/single/product/${element._id}`  %>>
+                                <a href=<%=`/user/single/product/${element._id}` %>>
                                   <%= element.title %>
                                 </a>
                               </h6>
@@ -227,7 +234,7 @@
                 style="width: 1110px !important; height: 236px; object-fit: cover;">
             </a>
           </div>
-          
+
         </div>
       </div>
       <!-- Banner-Image & View-more /- -->
@@ -563,20 +570,13 @@
     </style>
   </noscript>
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <!-- jQuery -->
+  
   <script>
-    window.ga = function () {
-      ga.q.push(arguments)
-    };
-    ga.q = [];
-    ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto');
-    ga('send', 'pageview')
-  </script>
-  <script>
-    async function total(){
+    async function total() {
       try {
         const { data: response } = await axios.get(
-          `http://localhost:3000//cart-total`
+          `http://localhost:3000/user/home/cart-total`
         );
         let html = `<i class="ion ion-md-basket"></i>
                 <span class="item-counter">${response.totalProduct}</span>
@@ -593,14 +593,27 @@
         console.log(error);
       }
     }
+    async function whishList(id) {
+
+      let element = document.getElementById("addwishlist");
+      let className = document.getElementsByClassName("activeWishList");
+      if (className.length > 0) {
+        await axios.delete(`http://localhost:3000/user/wish-list/${id}`)
+        element.classList.remove("activeWishList")
+      } else {
+        const { data: response } = await axios.get(
+          `http://localhost:3000/user/add/wish-list/${id}`
+        );
+        element.classList.add("activeWishList")
+      }
+
+    }
   </script>
   <script src="/js/home.js"></script>
   <!-- Modernizr-JS -->
   <script type="text/javascript" src="/js/vendor/modernizr-custom.min.js"></script>
   <!-- NProgress -->
   <script type="text/javascript" src="/js/nprogress.min.js"></script>
-  <!-- jQuery -->
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
   <!-- Bootstrap JS -->
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <!-- Popper -->
@@ -625,9 +638,6 @@
   <script type="text/javascript" src="/js/app.js"></script>
   <!-- Axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 

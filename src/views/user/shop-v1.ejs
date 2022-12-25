@@ -50,7 +50,7 @@
                         <ul class="bread-crumb">
                             <li class="has-separator">
                                 <i class="ion ion-md-home"></i>
-                                <a href="/">Home</a>
+                                <a href="/user/home">Home</a>
                             </li>
                             <li class="is-marked">
                                 <a href="shop-v1-root-category.html">Shop</a>
@@ -306,8 +306,8 @@
                                             <div class="image-container">
                                                 <a class="item-img-wrapper-link"
                                                     href=<%=`/user/single/product/${element._id}`%>>
-                                                    <img class="img-fluid" src="<%= element.image %> "
-                                                        alt="Product" style="height: 215px;object-fit: cover;">
+                                                    <img class="img-fluid" src="<%= element.image %> " alt="Product"
+                                                        style="height: 215px;object-fit: cover;">
                                                 </a>
                                                 <div class="item-action-behaviors">
                                                     <a class="item-addCart" data-toggle="modal" href="#quick-view" <%-
@@ -365,16 +365,16 @@
                                         </a>
                                     </li>
                                     <!-- class="active" -->
-                                    <% for(let i = 1 ; i <= count ; i++){ %>
+                                    <% for(let i=1 ; i <=count ; i++){ %>
                                         <li>
-                                            <a href=<%= `/user/shop-v1/${i}`%> ><%= i %> </a>
+                                            <a href=<%=`/user/shop-v1/${i}`%> ><%= i %> </a>
                                         </li>
-                                   <% } %> 
-                                    <li>
-                                        <a href="shop-v1-root-category.html" title="Next">
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </li>
+                                        <% } %>
+                                            <li>
+                                                <a href="shop-v1-root-category.html" title="Next">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </li>
                                 </ul>
                             </div>
                         </div>
@@ -429,7 +429,7 @@
                                     <h6>COMPANY</h6>
                                     <ul>
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href="/user/home">Home</a>
                                         </li>
                                         <li>
                                             <a href="about.html">About</a>
@@ -525,7 +525,7 @@
                             </ul>
                         </div>
                         <p class="copyright-text">Copyright &copy; 2018
-                            <a href="/">Groover</a> All Right Reserved
+                            <a href="/user/home">Groover</a> All Right Reserved
                         </p>
                     </div>
                 </div>
@@ -598,16 +598,6 @@
             }
         </style>
     </noscript>
-    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-    <script>
-        window.ga = function () {
-            ga.q.push(arguments)
-        };
-        ga.q = [];
-        ga.l = +new Date;
-        ga('create', 'UA-XXXXX-Y', 'auto');
-        ga('send', 'pageview')
-    </script>
     <script src="/js/home.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
         integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
@@ -619,14 +609,14 @@
             console.log(value);
             try {
                 const { data: response } = await axios.get(
-                    `http://localhost:3000//show-list/${value}`
+                    `http://localhost:3000/user/home/show-list/${value}`
                 );
                 let html = ""
                 response.data.forEach(element => {
                     html += `<div class="item">
                                             <div class="image-container">
                                                 <a class="item-img-wrapper-link"
-                                                    href="/user/single/product/${element._id }">
+                                                    href="/user/single/product/${element._id}">
                                                     <img class="img-fluid" src="${element.image}"
                                                         alt="Product">
                                                 </a>
@@ -645,12 +635,12 @@
                                                         </li>
                                                     </ul>
                                                     <h6 class="item-title">
-                                                        <a href="/user/single/product/${ element._id }">
+                                                        <a href="/user/single/product/${element._id}">
                                                                 ${element.title} </a>
                                                     </h6>
                                                     <div class="item-description">
                                                         <p>
-                                                            ${element.description }
+                                                            ${element.description}
                                                         </p>
                                                     </div>
                                                     <div class="item-stars">
@@ -663,9 +653,9 @@
                                                 <div class="price-template">
                                                     <div class="item-new-price">
                                                         ${element.price.toLocaleString('it-IT', {
-                                                            style: 'currency',
-                                                            currency: 'VND',
-                                                        }) }
+                        style: 'currency',
+                        currency: 'VND',
+                    })}
                                                     </div>
                                                 </div>
                                             </div>
@@ -676,14 +666,74 @@
                 console.log(err)
             }
         }
+        async function searchProduct() {
+            try {
+                let e = document.getElementById("search-landscapes");
+                let value = e.value;
+                const { data: response } = await axios.get(
+                    `http://localhost:3000/user/search?title=${value}`
+                );
+                let html = ""
+                response.forEach(element => {
+                    html += `<div class="item">
+                                            <div class="image-container">
+                                                <a class="item-img-wrapper-link"
+                                                    href="/user/single/product/${element._id}">
+                                                    <img class="img-fluid" src="${element.image}"
+                                                        alt="Product">
+                                                </a>
+                                                <div class="item-action-behaviors">
+                                                    <a class="item-addCart" data-toggle="modal" href="#quick-view"
+                                                        onclick = "myFunction(${element._id})">Add to Cart</a>
+                                                    <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                        Wishlist</a>
+                                                </div>
+                                            </div>
+                                            <div class="item-content">
+                                                <div class="what-product-is">
+                                                    <ul class="bread-crumb">
+                                                        <li class="has-separator">
+                                                            <a href="shop-v1-root-category.html">Men's</a>
+                                                        </li>
+                                                    </ul>
+                                                    <h6 class="item-title">
+                                                        <a href="/user/single/product/${element._id}">
+                                                                ${element.title} </a>
+                                                    </h6>
+                                                    <div class="item-description">
+                                                        <p>
+                                                            ${element.description}
+                                                        </p>
+                                                    </div>
+                                                    <div class="item-stars">
+                                                        <div class='star' title="4.5 out of 5 - based on 23 Reviews">
+                                                            <span style='width:67px'></span>
+                                                        </div>
+                                                        <span>(23)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="price-template">
+                                                    <div class="item-new-price">
+                                                        ${element.price.toLocaleString('it-IT', {
+                        style: 'currency',
+                        currency: 'VND',
+                    })}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`
+                })
+                document.getElementById("listProduct").innerHTML = html;
+            } catch (err) { 
+                console.log(err)
+            }
+        }
     </script>
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
     <!-- Modernizr-JS -->
     <script type="text/javascript" src="/js/vendor/modernizr-custom.min.js"></script>
     <!-- NProgress -->
     <script type="text/javascript" src="/js/nprogress.min.js"></script>
-    <!-- jQuery -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
     <!-- Bootstrap JS -->
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <!-- Popper -->

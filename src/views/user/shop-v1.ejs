@@ -277,9 +277,9 @@
                                 <div class="toolbar-sorter">
                                     <div class="select-box-wrapper">
                                         <label class="sr-only" for="sort-by">Sort By</label>
-                                        <select class="select-box" id="sort-by">
-                                            <option value="">Sort By: Lowest Price</option>
-                                            <option value="">Sort By: Highest Price</option>
+                                        <select class="select-box" id="sort-by" onchange="change()">
+                                            <option value="down">Sort By: Lowest Price</option>
+                                            <option value="up">Sort By: Highest Price</option>
                                         </select>
                                     </div>
                                 </div>
@@ -365,16 +365,11 @@
                                         </a>
                                     </li>
                                     <!-- class="active" -->
-                                    <% for(let i=1 ; i <=count ; i++){ %>
-                                        <li>
-                                            <a href=<%=`/user/shop-v1/${i}`%> ><%= i %> </a>
-                                        </li>
-                                        <% } %>
+                                        <% for(let i=1 ; i <=count ; i++){ %>
                                             <li>
-                                                <a href="shop-v1-root-category.html" title="Next">
-                                                    <i class="fa fa-angle-right"></i>
-                                                </a>
+                                                <a <%- `onclick="changePage('${i}')" ` %>><%= i %> </a>
                                             </li>
+                                            <% } %>
                                 </ul>
                             </div>
                         </div>
@@ -724,7 +719,129 @@
                                         </div>`
                 })
                 document.getElementById("listProduct").innerHTML = html;
-            } catch (err) { 
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        async function change() {
+            let e = document.getElementById("sort-by");
+            let value = e.value;
+            console.log(value);
+            try {
+                const { data: response } = await axios.get(
+                    `http://localhost:3000/user/sort-by?sort=${value}`
+                );
+                let html = ""
+                response.data.forEach(element => {
+                    html += `<div class="item">
+                                            <div class="image-container">
+                                                <a class="item-img-wrapper-link"
+                                                    href="/user/single/product/${element._id}">
+                                                    <img class="img-fluid" src="${element.image}"
+                                                        alt="Product">
+                                                </a>
+                                                <div class="item-action-behaviors">
+                                                    <a class="item-addCart" data-toggle="modal" href="#quick-view"
+                                                        onclick = "myFunction(${element._id})">Add to Cart</a>
+                                                    <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                        Wishlist</a>
+                                                </div>
+                                            </div>
+                                            <div class="item-content">
+                                                <div class="what-product-is">
+                                                    <ul class="bread-crumb">
+                                                        <li class="has-separator">
+                                                            <a href="shop-v1-root-category.html">Men's</a>
+                                                        </li>
+                                                    </ul>
+                                                    <h6 class="item-title">
+                                                        <a href="/user/single/product/${element._id}">
+                                                                ${element.title} </a>
+                                                    </h6>
+                                                    <div class="item-description">
+                                                        <p>
+                                                            ${element.description}
+                                                        </p>
+                                                    </div>
+                                                    <div class="item-stars">
+                                                        <div class='star' title="4.5 out of 5 - based on 23 Reviews">
+                                                            <span style='width:67px'></span>
+                                                        </div>
+                                                        <span>(23)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="price-template">
+                                                    <div class="item-new-price">
+                                                        ${element.price.toLocaleString('it-IT', {
+                        style: 'currency',
+                        currency: 'VND',
+                    })}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`
+                });
+                document.getElementById("listProduct").innerHTML = html;
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        async function changePage(i) {
+            try {
+                const { data: response } = await axios.put(`http://localhost:3000/user/shop-v1?page=${i}`)
+                let html = ""
+                console.log(response)
+                response.data.forEach(element => {
+                    html += `<div class="item">
+                                            <div class="image-container">
+                                                <a class="item-img-wrapper-link"
+                                                    href="/user/single/product/${element._id}">
+                                                    <img class="img-fluid" src="${element.image}"
+                                                        alt="Product">
+                                                </a>
+                                                <div class="item-action-behaviors">
+                                                    <a class="item-addCart" data-toggle="modal" href="#quick-view"
+                                                        onclick = "myFunction(${element._id})">Add to Cart</a>
+                                                    <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                        Wishlist</a>
+                                                </div>
+                                            </div>
+                                            <div class="item-content">
+                                                <div class="what-product-is">
+                                                    <ul class="bread-crumb">
+                                                        <li class="has-separator">
+                                                            <a href="shop-v1-root-category.html">Men's</a>
+                                                        </li>
+                                                    </ul>
+                                                    <h6 class="item-title">
+                                                        <a href="/user/single/product/${element._id}">
+                                                                ${element.title} </a>
+                                                    </h6>
+                                                    <div class="item-description">
+                                                        <p>
+                                                            ${element.description}
+                                                        </p>
+                                                    </div>
+                                                    <div class="item-stars">
+                                                        <div class='star' title="4.5 out of 5 - based on 23 Reviews">
+                                                            <span style='width:67px'></span>
+                                                        </div>
+                                                        <span>(23)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="price-template">
+                                                    <div class="item-new-price">
+                                                        ${element.price.toLocaleString('it-IT', {
+                        style: 'currency',
+                        currency: 'VND',
+                    })}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`
+                });
+                document.getElementById("listProduct").innerHTML = html;
+            } catch (err) {
                 console.log(err)
             }
         }

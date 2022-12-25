@@ -10,7 +10,7 @@ class Shop {
       login: login,
       idUser: idUser,
       product: product,
-      count: Math.round(count / size),
+      count: Math.ceil(count / size),
     });
   }
   async showList(req, res) {
@@ -18,15 +18,41 @@ class Shop {
     res.json({ message: "limit!", data: product });
   }
   async pagination(req, res) {
-    const page = req.params.page || 1;
-    const offset = (page - 1) * size;
-    Product.find({ offset: offset, limit: size }, (err, items) => {
-      if (err) {
-        res.status(500).json({ error: "Error fetching items" });
-      } else {
-        res.json(items);
-      }
+    const size = parseInt(req.query.size) || 8;
+    const page = parseInt(req.query.page) || 1;
+    let totalProduct = await Product.count();
+    const totalPages = Math.ceil(totalProduct / size);
+    let productPage = await Product.find()
+      .limit(size)
+      .skip((page - 1) * size);
+    res.json({
+      message: "Total!",
+      data: productPage,
+      totalProduct: totalProduct,
     });
+  }
+  sortBy(req, res) {
+    if (req.query.sort === "up") {
+      Product.find()
+        .sort({ price: 1 })
+        .exec((err, products) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.json({ message: "limit!", data: products });
+          }
+        });
+    } else {
+      Product.find()
+        .sort({ price: -1 })
+        .exec((err, products) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.json({ message: "limit!", data: products });
+          }
+        });
+    }
   }
 }
 export default new Shop();

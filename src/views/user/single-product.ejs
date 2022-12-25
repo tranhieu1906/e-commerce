@@ -66,7 +66,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <!-- Product-zoom-area -->
                     <div class="zoom-area">
-                        <img id="zoom-pro" class="img-fluid" src="/images/product/product@4x.jpg" data-zoom-image="/images/product/product@4x.jpg" alt="Zoom Image">
+                        <img id="zoom-pro" class="img-fluid" src="<%= data.image %> " data-zoom-image="/images/product/product@4x.jpg" alt="Zoom Image">
                     </div>
                     <!-- Product-zoom-area /- -->
                 </div>
@@ -164,10 +164,10 @@
                             <!-- Description-Tab -->
                             <div class="tab-pane fade active show" id="description">
                                 <div class="description-whole-container">
-                                    <p class="desc-p u-s-m-b-26">This hoodie is full cotton. It includes a muff sewn onto the lower front, and (usually) a drawstring to adjust the hood opening. Throughout the U.S., it is common for middle-school, high-school, and college students to wear this sweatshirts—with or without hoods—that display their respective school names or mascots across the chest, either as part of a uniform or personal preference.
+                                    <p class="desc-p u-s-m-b-26">
+                                        <%= data.description %> 
                                     </p>
-                                    <img class="desc-img img-fluid u-s-m-b-26" src="/images/product/product@3x.jpg" alt="Product">
-                                    <iframe class="desc-iframe u-s-m-b-45" width="710" height="400" src="/images/product/iframe-youtube.jpg" allowfullscreen></iframe>
+                                    <img class="desc-img img-fluid u-s-m-b-26" src="<%= data.image %> " alt="Product">
                                 </div>
                             </div>
                             <!-- Description-Tab /- -->

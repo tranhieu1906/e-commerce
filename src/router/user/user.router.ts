@@ -29,7 +29,8 @@ UserRoute.post("/check-out", checkOut.checkOut);
 
 UserRoute.get("/shop-v1", shop.ShowShopV1);
 UserRoute.get("/home/show-list/:limit", shop.showList);
-UserRoute.put("/shop-v1/:page", shop.pagination);
+UserRoute.put("/shop-v1", shop.pagination);
+UserRoute.get("/sort-by", shop.sortBy);
 
 UserRoute.get("/wish-list", whiteLists.ShowWishList);
 UserRoute.get("/add/wish-list/:id", whiteLists.addWishList);

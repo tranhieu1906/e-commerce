@@ -1,8 +1,7 @@
 import { Product } from "./../../schemas/product.schema";
 import { User } from "./../../schemas/user.schema";
+import { Cart } from "./../../schemas/cart.schema";
 
-import sharp from "sharp";
-import path from "path";
 class HomeAdmin {
   async showHome(req, res) {
     let product = await Product.aggregate([{ $sort: { createdAt: -1 } }]).limit(
@@ -34,11 +33,27 @@ class HomeAdmin {
   }
   async deleteProduct(req, res) {
     await Product.findByIdAndDelete(req.params.id);
+    await Cart.updateMany(
+      {},
+      {
+        $pull: {
+          items: { product: req.params.id },
+        },
+      }
+    );
     res.redirect("/admin");
   }
   async deleteManyProducts(req, res) {
     let checkedProductIds = req.body;
     await Product.deleteMany({ _id: { $in: checkedProductIds } });
+    await Cart.updateMany(
+      {},
+      {
+        $pull: {
+          items: { product: { $in: checkedProductIds } },
+        },
+      }
+    );
     res.redirect(req.get("referer"));
   }
   async showEditProduct(req, res) {
@@ -103,7 +118,7 @@ class HomeAdmin {
       }
     });
   }
-  async searchProduct(req,res){
+  async searchProduct(req, res) {
     let product = await Product.find({
       title: { $regex: req.query.title, $options: "i" },
     });

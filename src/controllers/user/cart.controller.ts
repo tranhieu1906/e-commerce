@@ -38,21 +38,31 @@ class Carts {
     }
   }
   async CartTotal(req, res) {
-    const cart = await Cart.findOne({ user: req.cookies.idUser }).populate(
-      "items.product"
-    );
-    let total = 0;
-    let totalProduct = 0;
-    if (cart) {
-      for (let i = 0; i < cart.items.length; i++) {
-        const item = cart.items[i];
-        //@ts-ignore
-        const price = item.product.price;
-        const quantity = item.quantity;
-        totalProduct += item.quantity;
-        total += price * quantity;
+    try {
+      const cart = await Cart.findOne({
+        user: req.cookies.idUser,
+      }).populate("items.product");
+      let total = 0;
+      let totalProduct = 0;
+      if (cart) {
+        for (let i = 0; i < cart.items.length; i++) {
+          const item = cart.items[i];
+          if (item) {
+            //@ts-ignore
+            const price = item.product.price;
+            const quantity = item.quantity;
+            totalProduct += item.quantity;
+            total += price * quantity;
+          }
+        }
+        res.json({
+          message: "Total!",
+          data: total,
+          totalProduct: totalProduct,
+        });
       }
-      res.json({ message: "Total!", data: total, totalProduct: totalProduct });
+    } catch (error) {
+      console.log(error.message);
     }
   }
   async Carts(req, res) {

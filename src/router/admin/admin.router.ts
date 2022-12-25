@@ -1,7 +1,6 @@
 import { Router } from "express";
 import HomeAdmin from "../../controllers/admin/home.controller";
 import multer from "multer";
-import sharp from "sharp";
 
 export const AdminRoute = Router();
 
@@ -10,7 +9,7 @@ var storage = multer.diskStorage({
     cb(null, __dirname + "../../../../../src/public/images/uploads");
   },
   filename: function (req, file, cb) {
-    let reg = /png|jpg|jpeg|svg/;
+    let reg = /png|jpg|webp|jpeg|svg/;
     let type = file.mimetype.match(reg);
     let filename = `${file.fieldname}-${Date.now()}.${type}`;
     cb(null, filename);

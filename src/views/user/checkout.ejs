@@ -66,6 +66,64 @@
                         <div class="col-lg-12 col-md-12">
                             <form method="post">
                                 <div class="row">
+                                    <!-- Billing-&-Shipping-Details -->
+                                    <div class="col-lg-6">
+                                        <h4 class="section-h4">Billing Details</h4>
+                                        <!-- Form-Fields -->
+                                        <div class="group-inline u-s-m-b-13">
+                                            <label for="first-name"> Name
+                                                <span class="astk">*</span>
+                                            </label>
+                                            <input type="text" id="first-name" name="name" class="text-field" value="<%= login.data.name %>" required>
+                                        </div>
+                                        <div class="u-s-m-b-13">
+                                            <label for="select-country">Country
+                                                <span class="astk">*</span>
+                                            </label>
+                                            <div class="select-box-wrapper">
+                                                <select class="select-box" id="select-country" name="country" >
+                                                    <option value="VietNam" selected="selected" >Việt Nam (VN)
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="street-address u-s-m-b-13">
+                                            <label for="req-st-address">Street Address
+                                                <span class="astk">*</span>
+                                            </label>
+                                            <input type="text" id="req-st-address" class="text-field"
+                                                placeholder="House name and street name" name="street" required> 
+                                        </div>
+                                        <div class="u-s-m-b-13">
+                                            <label for="town-city">Town / City
+                                                <span class="astk">*</span>
+                                            </label>
+                                            <input type="text" id="town-city" class="text-field" name="city" required>
+                                        </div>
+                                        <div class="u-s-m-b-13">
+                                            <label for="postcode">Postcode / Zip
+                                                <span class="astk">*</span>
+                                            </label>
+                                            <input type="text" id="postcode" class="text-field" name="zip" required>
+                                        </div>
+                                        <div class="group-inline u-s-m-b-13">
+                                            <div class="group-1 u-s-p-r-16">
+                                                <label for="email">Email address
+                                                    <span class="astk">*</span>
+                                                </label>
+                                                <input type="text" id="email" class="text-field" name="email" value="<%= login.data.email %>" required>
+                                            </div>
+                                            <div class="group-2">
+                                                <label for="phone">Phone
+                                                    <span class="astk">*</span>
+                                                </label>
+                                                <input type="text" id="phone" class="text-field" name="phone" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Form-Fields /- -->
+                                        
+                                    </div>
+                                    <!-- Billing-&-Shipping-Details /- -->
                                     <!-- Checkout -->
                                     <div class="col-lg-6">
                                         <h4 class="section-h4">Your Order</h4>
@@ -81,11 +139,18 @@
                                                     <% cart.forEach((element,index)=>{ %>
                                                         <tr>
                                                             <td>
-                                                                <h6 class="order-h6"><%= element.product.title %></h6>
-                                                                <span class="order-span-quantity">x <%= element.quantity %></span>
+                                                                <h6 class="order-h6">
+                                                                    <%= element.product.title %>
+                                                                </h6>
+                                                                <span class="order-span-quantity">x <%= element.quantity
+                                                                        %></span>
                                                             </td>
                                                             <td>
-                                                                <h6 class="order-h6"><%= (element.product.price * element.quantity).toLocaleString('it-IT', { style: 'currency' , currency: 'VND' , }) %></h6>
+                                                                <h6 class="order-h6">
+                                                                    <%= (element.product.price *
+                                                                        element.quantity).toLocaleString('it-IT', {
+                                                                        style: 'currency' , currency: 'VND' , }) %>
+                                                                </h6>
                                                             </td>
                                                         </tr>
                                                         <% }) %>

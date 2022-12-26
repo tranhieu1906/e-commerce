@@ -1,6 +1,8 @@
 import { Product } from "./../../schemas/product.schema";
 import { User } from "./../../schemas/user.schema";
 import { Cart } from "./../../schemas/cart.schema";
+import { wishList } from "../../schemas/wishlist.schema";
+import { CheckoutProduct } from "./../../schemas/checkOut.schema";
 
 class HomeAdmin {
   async showHome(req, res) {
@@ -41,12 +43,28 @@ class HomeAdmin {
         },
       }
     );
+    await wishList.updateMany(
+      {},
+      {
+        $pull: {
+          items: { product: req.params.id },
+        },
+      }
+    );
     res.redirect("/admin");
   }
   async deleteManyProducts(req, res) {
     let checkedProductIds = req.body;
     await Product.deleteMany({ _id: { $in: checkedProductIds } });
     await Cart.updateMany(
+      {},
+      {
+        $pull: {
+          items: { product: { $in: checkedProductIds } },
+        },
+      }
+    );
+    await wishList.updateMany(
       {},
       {
         $pull: {
@@ -67,6 +85,7 @@ class HomeAdmin {
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
+        quantity: req.body.quantity,
         image: "/images/uploads/" + req.file.filename,
       }
     );
@@ -123,6 +142,37 @@ class HomeAdmin {
       title: { $regex: req.query.title, $options: "i" },
     });
     res.status(200).json(product);
+  }
+  async ShowPageBestseller(req, res) {
+    let checkout = await CheckoutProduct.find();
+    let arrMonth = [];
+    checkout.forEach((element) => {
+      if (!arrMonth.includes(element.createdAt.getMonth() + 1)) {
+        arrMonth.push(element.createdAt.getMonth() + 1);
+      }
+    });
+    const result = await CheckoutProduct.aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: new Date("2022-12-01"),
+            $lt: new Date("2023-01-01"),
+          },
+        },
+      },
+    ]);
+    const groupedItems = {};
+    checkout.forEach((order) => {
+      order.items.forEach((item) => {
+        const month = order.createdAt.getMonth() + 1;
+        if (!groupedItems[month]) {
+          groupedItems[month] = [];
+        }
+        groupedItems[+month].push(item);
+      });
+    });
+    console.log(groupedItems);
+    res.render("admin/bestseller", { arrMonth: arrMonth });
   }
 }
 export default new HomeAdmin();

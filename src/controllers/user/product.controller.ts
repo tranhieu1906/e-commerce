@@ -14,10 +14,12 @@ class Products {
     });
   }
   async SearchProduct(req,res){
-    let product = await Product.find({
-      title: { $regex: req.query.title, $options: "i" },
-    });
-    console.log(product);
+    let product = await Product.find(
+      {
+        title: { $regex: req.query.title, $options: "i" },
+        quantity: { $gt: 0 },
+      }
+    );
     res.status(200).json(product);
   }
 }

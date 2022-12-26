@@ -37,7 +37,9 @@
 
 		<div id="sidebar">
 			<div class="sidebar-header">
-				<h3><img src="img/logo.png" class="img-fluid" /><span>vishweb design</span></h3>
+				<a href="/admin">
+					<img src="/images/main-logo/groover-branding-1.png" alt="Groover Brand Logo" class="app-brand-logo">
+				</a>
 			</div>
 			<ul class="list-unstyled component m-0">
 				<li class="active">
@@ -45,12 +47,28 @@
 				</li>
 				<li class="dropdown">
 					<a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-						<i class="material-icons">equalizer</i>Mangager
+						<i class="material-icons">apps</i>Mangager
 					</a>
 					<ul class="collapse list-unstyled menu" id="homeSubmenu3">
 						<li><a href="/admin/user">Mangager User</a></li>
 						<!-- <li><a href="#">Pages 2</a></li>
 						<li><a href="#">Pages 3</a></li> -->
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+						<i class="material-icons">equalizer</i>
+						<span>chart</span></a>
+					<ul class="collapse list-unstyled menu" id="pageSubmenu3">
+						<li>
+							<a href="/admin/best-selling">Product best Selling</a>
+						</li>
+						<li>
+							<a href="#">Page 2</a>
+						</li>
+						<li>
+							<a href="#">Page 3</a>
+						</li>
 					</ul>
 				</li>
 
@@ -81,13 +99,13 @@
 
 						<div class="col-md-5 col-lg-3 order-3 order-md-2">
 							<div class="xp-searchbar">
-									<div class="input-group ui-widget">
-										<input id="tags" class="form-control" name="search">
-										<div class="input-group-append">
-											<button class="btn" id="button-addon2" onclick="search()">Go
-											</button>
-										</div>
+								<div class="input-group ui-widget">
+									<input id="tags" class="form-control" name="search">
+									<div class="input-group-append">
+										<button class="btn" id="button-addon2" onclick="search()">Go
+										</button>
 									</div>
+								</div>
 							</div>
 						</div>
 
@@ -129,7 +147,7 @@
 														<span class="material-icons">settings</span>
 														Settings
 													</a></li>
-												<li><a href="#">
+												<li><a href="/auth/logout">
 														<span class="material-icons">logout</span>
 														Logout
 													</a></li>
@@ -194,6 +212,7 @@
 										<th>title</th>
 										<th>description</th>
 										<th>price</th>
+										<th>quantity</th>
 										<th>action</th>
 									</tr>
 								</thead>
@@ -221,7 +240,9 @@
 												<%= element.price.toLocaleString( "it-IT" , { style: "currency" ,
 													currency: "VND" , } ) %>
 											</th>
-
+											<th>
+												<%= element.quantity %>
+											</th>
 											<th>
 												<a href=<%=`/admin/edit/${element._id}` %> class="edit" >
 													<i class="material-icons" data-toggle="tooltip"
@@ -440,7 +461,9 @@
 					currency: "VND",
 				})}
 												</th>
-
+												<th>
+													${element.quantity}
+												</th>
 												<th>
 													<a href="/admin/edit/${element._id}" class="edit" >
 														<i class="material-icons" data-toggle="tooltip"
@@ -482,7 +505,9 @@
 					currency: "VND",
 				})}
 												</th>
-
+												<th>
+													${element.quantity}
+												</th>
 												<th>
 													<a href="/admin/edit/${element._id}" class="edit" >
 														<i class="material-icons" data-toggle="tooltip"

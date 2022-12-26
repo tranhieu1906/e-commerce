@@ -32,6 +32,12 @@
     <link rel="stylesheet" href="/css/utility.css">
     <!-- Main -->
     <link rel="stylesheet" href="/css/bundle.css">
+    <style>
+        .activeWishList {
+            color: #ffffff;
+            background-color: #d90429;
+        }
+    </style>
 </head>
 
 <body>
@@ -312,7 +318,8 @@
                                                 <div class="item-action-behaviors">
                                                     <a class="item-addCart" data-toggle="modal" href="#quick-view" <%-
                                                         `onclick="myFunction('${element._id}')" `%>>Add to Cart</a>
-                                                    <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                    <a class="item-addwishlist" id="addwishlist" href="javascript:void(0)" <%-
+                                                        `onclick="whishList('${element._id}')" `%>>Add to
                                                         Wishlist</a>
                                                 </div>
                                             </div>
@@ -365,11 +372,11 @@
                                         </a>
                                     </li>
                                     <!-- class="active" -->
-                                        <% for(let i=1 ; i <=count ; i++){ %>
-                                            <li>
-                                                <a <%- `onclick="changePage('${i}')" ` %>><%= i %> </a>
-                                            </li>
-                                            <% } %>
+                                    <% for(let i=1 ; i <=count ; i++){ %>
+                                        <li>
+                                            <a <%- `onclick="changePage('${i}')" ` %>><%= i %> </a>
+                                        </li>
+                                        <% } %>
                                 </ul>
                             </div>
                         </div>
@@ -618,7 +625,8 @@
                                                 <div class="item-action-behaviors">
                                                     <a class="item-addCart" data-toggle="modal" href="#quick-view"
                                                         onclick = "myFunction(${element._id})">Add to Cart</a>
-                                                    <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                    <a class="item-addwishlist" id="addwishlist" href="javascript:void(0)" 
+                                onclick = "whishList('${element._id}')">Add to
                                                         Wishlist</a>
                                                 </div>
                                             </div>
@@ -680,7 +688,7 @@
                                                 <div class="item-action-behaviors">
                                                     <a class="item-addCart" data-toggle="modal" href="#quick-view"
                                                         onclick = "myFunction(${element._id})">Add to Cart</a>
-                                                    <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                    <a class="item-addwishlist" id="addwishlist" href="javascript:void(0)" onclick = "whishList('${element._id}')">Add to
                                                         Wishlist</a>
                                                 </div>
                                             </div>
@@ -743,7 +751,7 @@
                                                 <div class="item-action-behaviors">
                                                     <a class="item-addCart" data-toggle="modal" href="#quick-view"
                                                         onclick = "myFunction(${element._id})">Add to Cart</a>
-                                                    <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                    <a class="item-addwishlist" id="addwishlist" href="javascript:void(0)" onclick = "whishList('${element._id}')">Add to
                                                         Wishlist</a>
                                                 </div>
                                             </div>
@@ -802,7 +810,7 @@
                                                 <div class="item-action-behaviors">
                                                     <a class="item-addCart" data-toggle="modal" href="#quick-view"
                                                         onclick = "myFunction(${element._id})">Add to Cart</a>
-                                                    <a class="item-addwishlist" href="javascript:void(0)">Add to
+                                                    <a class="item-addwishlist" id="addwishlist" href="javascript:void(0)" onclick = "whishList('${element._id}')">Add to
                                                         Wishlist</a>
                                                 </div>
                                             </div>
@@ -845,8 +853,26 @@
                 console.log(err)
             }
         }
+        async function whishList(id) {
+
+                let element = document.getElementById("addwishlist");
+                let className = document.getElementsByClassName("activeWishList");
+                if (className.length > 0) {
+                    await axios.delete(`http://localhost:3000/user/wish-list/${id}`)
+                    element.classList.remove("activeWishList")
+                } else {
+                    const { data: response } = await axios.get(
+                        `http://localhost:3000/user/add/wish-list/${id}`
+                    );
+                    element.classList.add("activeWishList")
+                    $.notify("Add wishList success !", "success");
+                }
+
+            }
     </script>
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <!-- notify -->
+    <script type="text/javascript" src="/js/notify.min.js"></script>
     <!-- Modernizr-JS -->
     <script type="text/javascript" src="/js/vendor/modernizr-custom.min.js"></script>
     <!-- NProgress -->

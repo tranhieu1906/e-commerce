@@ -5,7 +5,7 @@ import JWT from "jsonwebtoken";
 
 class HomeUser {
   async showHomePage(req, res) {
-    let product = await Product.find().limit(8);
+    let product = await Product.find({ quantity: { $gt: 0 } }).limit(8);
     const token = req.cookies.login;
     const idUser = req.cookies.idUser;
     JWT.verify(token, process.env.SECRET_KEY, (err, payload) => {
@@ -32,7 +32,7 @@ class HomeUser {
   }
   autocomplete(req, res) {
     let regex = new RegExp(req.query["term"], "i");
-    let productFilter = Product.find({ title: regex }, { title: 1 })
+    let productFilter = Product.find({ title: regex }, { title: 1 }, {quantity: { $gt: 0 }})
       .sort({
         createdAt: -1,
       })

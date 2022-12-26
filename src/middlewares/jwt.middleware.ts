@@ -60,10 +60,10 @@ class Token {
       if (userRole === "admin") {
         next();
       } else {
-        res.redirect("/auth/login")
+        res.redirect("/auth/login");
       }
     } catch (error) {
-      return res.status(401).json({ message: "Unauthorized" });
+      res.redirect("/auth/login");
     }
   }
 }

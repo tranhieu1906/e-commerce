@@ -76,13 +76,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <form method="post" action="<%= `/user/save-cart/${idCart}` %>" id="myform">
-                                         <% cart.forEach((element,index)=>{ %>
+                                        <% cart.forEach((element,index)=>{ %>
                                             <tr>
                                                 <td>
                                                     <div class="cart-anchor-image">
                                                         <a href="single-product.html">
-                                                            <img src= <%= element.product.image %> alt="Product">
+                                                            <img src=<%=element.product.image %> alt="Product">
                                                             <h6>
                                                                 <%= element.product.title %>
                                                             </h6>
@@ -102,7 +101,7 @@
                                                             <input type="number" class="quantity-text-field"
                                                                 value="<%= element.quantity %>" min="1"
                                                                 name="quantity<%= index %>"
-                                                                data-product-id="<%= element.product._id %>">
+                                                                data-product-id="<%= element.product._id %>" disabled>
                                                         </div>
                                                     </div>
 
@@ -119,7 +118,6 @@
                                                 </td>
                                             </tr>
                                             <% }) %>
-                                        </form>
                                     </tbody>
                                 </table>
                             </div>

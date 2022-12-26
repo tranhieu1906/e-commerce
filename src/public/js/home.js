@@ -113,7 +113,7 @@ async function myFunction(id, idUser) {
               </div>
             </div>`;
     document.getElementById("Product-details").innerHTML = html;
-
+                
     return response;
   } catch (error) {
     console.log(error);

@@ -2,7 +2,7 @@ import { Product } from "./../../schemas/product.schema";
 let size = 8;
 class Shop {
   async ShowShopV1(req, res) {
-    let product = await Product.find().limit(8);
+    let product = await Product.find({ quantity: { $gt: 0 } }).limit(8);
     let login = req.cookies.login;
     const idUser = req.cookies.idUser;
     let count = await Product.find().count();
@@ -22,7 +22,7 @@ class Shop {
     const page = parseInt(req.query.page) || 1;
     let totalProduct = await Product.count();
     const totalPages = Math.ceil(totalProduct / size);
-    let productPage = await Product.find()
+    let productPage = await Product.find({ quantity: { $gt: 0 } })
       .limit(size)
       .skip((page - 1) * size);
     res.json({

@@ -571,7 +571,7 @@
   </noscript>
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <!-- jQuery -->
-  
+
   <script>
     async function total() {
       try {
@@ -605,10 +605,13 @@
           `http://localhost:3000/user/add/wish-list/${id}`
         );
         element.classList.add("activeWishList")
+        $.notify("Add wishList success !", "success");
       }
 
     }
   </script>
+  <script type="text/javascript" src="/js/notify.min.js"></script>
+
   <script src="/js/home.js"></script>
   <!-- Modernizr-JS -->
   <script type="text/javascript" src="/js/vendor/modernizr-custom.min.js"></script>

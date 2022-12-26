@@ -12,6 +12,7 @@ import multer from "multer";
 import { AuthRoute } from "./src/router/auth.router";
 import { UserRoute } from "./src/router/user/user.router";
 import { AdminRoute } from "./src/router/admin/admin.router";
+import Home from "././src/controllers/user/home.controller";
 import Token from "./src/middlewares/jwt.middleware";
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -54,6 +55,8 @@ app.use((req: any, res, next) => {
   req.idUser = idUser;
   next();
 });
+
+app.get("/",Home.showHomePage)
 
 app.use("/user", UserRoute);
 

@@ -321,11 +321,12 @@
     </noscript>
     <script>
         async function deleteWishList(id) {
-            await axios.delete(`http://localhost:3000/user/wish-list/${id}`)
-            let product = await axios.get(`http://localhost:3000/user/show-list/${id}`)
-            let html = ""
-            product.data.items.forEach(element => {
-                html += ` <tr>
+            if (confirm("Are you sure you want to remove this product from wishList!") == true) {
+                 await axios.delete(`http://localhost:3000/user/wish-list/${id}`)
+                let product = await axios.get(`http://localhost:3000/user/show-list/${id}`)
+                let html = ""
+                product.data.items.forEach(element => {
+                    html += ` <tr>
                                                 <td>
                                                     <div class="cart-anchor-image">
                                                         <a href="/user/single/product">
@@ -355,8 +356,9 @@
                                                     </div>
                                                 </td>
                                             </tr>`
-            });
-            document.getElementById("product").innerHTML = html
+                });
+                document.getElementById("product").innerHTML = html
+            }
         }
         async function showList(id) {
             let product = await axios.get(`http://localhost:3000/user/show-list/${id}`)

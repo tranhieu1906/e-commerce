@@ -8,8 +8,7 @@ import shop from "../../controllers/user/shop.controller";
 import whiteLists from "../../controllers/user/wishList.controller";
 import Token from "../../middlewares/jwt.middleware";
 
-UserRoute.get("/home", Home.showHomePage);
-UserRoute.post("/home", Home.HomePage);
+
 UserRoute.get("/home/add-cart/:id", Home.showAddCart);
 UserRoute.get("/auto-complete",Home.autocomplete);
 

@@ -39,6 +39,9 @@
             background-color: #ffffff;
             box-shadow: 0 1px 2px 1px #ddd;
         }
+        .error{
+            border: 2px solid red !important;
+        }
     </style>
 
     <!-- Tell the browser to be responsive to screen width -->
@@ -202,13 +205,13 @@
 
         </div>
         <div class="inputGroup">
-            <input class="loginName" id="Phone" name="email" placeholder="Email" type="email" value="" />
+            <input class="loginName" id="Email" name="email" placeholder="Email" type="email" value="" />
 
         </div>
         <div class="inputGroup">
             <input class="password" id="Password" name="password" placeholder="Mật khẩu" type="password" />
-
         </div>
+        <p id="error" style="color: red;"></p>
         <div class="inputGroup">
             <button class="btn btn-primary btn-block btn-flat g-recaptcha" id="btnLogin" type="submit">Đăng
                 nhập</button>
@@ -220,10 +223,12 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <a class="btn btn-google btn-block text-uppercase btn-outline" href="/auth/google"><i class="fa-brands fa-google mr-3"></i>Google</a>
+                <a class="btn btn-google btn-block text-uppercase btn-outline" href="/auth/google"><i
+                        class="fa-brands fa-google mr-3"></i>Google</a>
             </div>
             <div class="col-md-6">
-                <a class="btn btn-google btn-block text-uppercase btn-outline" href="/auth/facebook"><i class="fa-brands fa-facebook mr-3 "></i>Facebook</a>
+                <a class="btn btn-google btn-block text-uppercase btn-outline" href="/auth/facebook"><i
+                        class="fa-brands fa-facebook mr-3 "></i>Facebook</a>
             </div>
         </div>
         <div style="text-align: right;margin-bottom: -15px;font-size:14px;" class="mt-3">
@@ -239,6 +244,27 @@
         "use strict";
         function onSubmit(token) {
             document.getElementById("frmLogin").submit();
+        }
+    </script>
+    <script>
+        document.getElementById("Email").addEventListener("blur", validateEmail)
+        document.getElementById("Password").addEventListener("blur", validatePassword)
+        function validateEmail() {
+            let email = document.getElementById("Email").value
+            const re =
+                /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            if(!email.match(re)){
+                document.getElementById("Email").classList.add("error")
+                document.getElementById("error").innerHTML = "Please enter a valid email address"
+            }
+        }
+        function validatePassword(){
+            let password = document.getElementById("Password").value
+            const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+            if (!password.match(re)) {
+                document.getElementById("Password").classList.add("error")
+                 document.getElementById("error").innerHTML = "Please enter password at least 8 characters"
+            }
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

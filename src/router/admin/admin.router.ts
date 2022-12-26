@@ -29,6 +29,6 @@ AdminRoute.get("/user", HomeAdmin.userPage);
 AdminRoute.get("/user/delete-many", HomeAdmin.deleteManyUser);
 AdminRoute.get("/auto-complete", HomeAdmin.autocomplete);
 AdminRoute.get("/search", HomeAdmin.searchProduct);
-AdminRoute.get("/best-selling",HomeAdmin.ShowPageBestseller);
+AdminRoute.get("/order", HomeAdmin.OrderManager);
 
 

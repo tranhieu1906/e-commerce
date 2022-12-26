@@ -143,36 +143,9 @@ class HomeAdmin {
     });
     res.status(200).json(product);
   }
-  async ShowPageBestseller(req, res) {
-    let checkout = await CheckoutProduct.find();
-    let arrMonth = [];
-    checkout.forEach((element) => {
-      if (!arrMonth.includes(element.createdAt.getMonth() + 1)) {
-        arrMonth.push(element.createdAt.getMonth() + 1);
-      }
-    });
-    const result = await CheckoutProduct.aggregate([
-      {
-        $match: {
-          createdAt: {
-            $gte: new Date("2022-12-01"),
-            $lt: new Date("2023-01-01"),
-          },
-        },
-      },
-    ]);
-    const groupedItems = {};
-    checkout.forEach((order) => {
-      order.items.forEach((item) => {
-        const month = order.createdAt.getMonth() + 1;
-        if (!groupedItems[month]) {
-          groupedItems[month] = [];
-        }
-        groupedItems[+month].push(item);
-      });
-    });
-    console.log(groupedItems);
-    res.render("admin/bestseller", { arrMonth: arrMonth });
+  async OrderManager(req,res){
+    let checkout = await CheckoutProduct.find()
+    res.render("admin/order", { checkout: checkout });
   }
 }
 export default new HomeAdmin();

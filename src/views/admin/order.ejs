@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>crud dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!----css3---->
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <!--google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+    <!--google material icon-->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+    <div class="wrapper">
+
+        <div class="body-overlay"></div>
+
+        <!-------sidebar--design------------>
+
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <a href="/admin">
+                    <img src="/images/main-logo/groover-branding-1.png" alt="Groover Brand Logo" class="app-brand-logo">
+                </a>
+            </div>
+            <ul class="list-unstyled component m-0">
+                <li class="active">
+                    <a href="#" class="dashboard"><i class="material-icons">dashboard</i>dashboard </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="material-icons">apps</i>Mangager
+                    </a>
+                    <ul class="collapse list-unstyled menu" id="homeSubmenu3">
+                        <li><a href="/admin/user">Mangager User</a></li>
+                        <li><a href="/admin/order">Manager Order</a></li>
+                        <li><a href="#">Pages 3</a></li> -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-------sidebar--design- close----------->
+
+
+
+        <!-------page-content start----------->
+
+        <div id="content">
+
+            <!------top-navbar-start----------->
+
+            <div class="top-navbar">
+                <div class="xd-topbar">
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-lg-1 order-2 order-md-1 align-self-center">
+                            <div class="xp-menubar">
+                                <span class="material-icons text-white">signal_cellular_alt</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-lg-3 order-3 order-md-2">
+                            <div class="xp-searchbar">
+                                <div class="input-group ui-widget">
+                                    <input id="tags" class="form-control" name="search">
+                                    <div class="input-group-append">
+                                        <button class="btn" id="button-addon2" onclick="search()">Go
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-10 col-md-6 col-lg-8 order-1 order-md-3">
+                            <div class="xp-profilebar text-right">
+                                <nav class="navbar p-0">
+                                    <ul class="nav navbar-nav flex-row ml-auto">
+
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">
+                                                <span class="material-icons">question_answer</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="dropdown nav-item">
+                                            <a class="nav-link" href="#" data-toggle="dropdown">
+                                                <img src="img/user.jpg" style="width:40px; border-radius:50%;" />
+                                                <span class="xp-user-live"></span>
+                                            </a>
+                                            <ul class="dropdown-menu small-menu">
+                                                <li><a href="#">
+                                                        <span class="material-icons">person_outline</span>
+                                                        Profile
+                                                    </a></li>
+                                                <li><a href="#">
+                                                        <span class="material-icons">settings</span>
+                                                        Settings
+                                                    </a></li>
+                                                <li><a href="/auth/logout">
+                                                        <span class="material-icons">logout</span>
+                                                        Logout
+                                                    </a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="xp-breadcrumbbar text-center">
+                        <h4 class="page-title">Dashboard</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Vishweb</a></li>
+                            <li class="breadcrumb-item active" aria-curent="page">Dashboard</li>
+                        </ol>
+                    </div>
+
+
+                </div>
+            </div>
+            <!------top-navbar-end----------->
+
+
+            <!------main-content-start----------->
+
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+                                        <h2 class="ml-lg-2">Manage Employees</h2>
+                                    </div>
+                                    <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
+                                        <button class="btn btn-danger" onclick="deleteProduct()">
+                                            <i class="material-icons">&#xE15C;</i>
+                                            <span>Delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <span class="custom-checkbox">
+                                                <input type="checkbox" id="selectAll">
+                                                <label for="selectAll"></label>
+                                            </span>
+                                        </th>
+                                        <th>ID</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% checkout.forEach(element=>{ %>
+                                        <tr>
+                                            <td>
+                                                <span class="custom-checkbox">
+                                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                                    <label for="checkbox1"></label>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="http://">
+                                                    <%= element._id %>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <%= element.customer.name %>
+                                            </td>
+                                            <td>
+                                                <%= element.customer.email %>
+                                            </td>
+                                            <td>
+                                                <%= element.customer.phone %>
+                                            </td>
+                                            <td>
+                                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal">
+                                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                            
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!----add-product-modal start--------->
+                    <div class="modal fade" tabindex="-1" id="addProductModal" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <!--  -->
+                            <form class="modal-content" action="/admin/add-product" enctype='multipart/form-data'
+                                method="post">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add Product</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" name="title" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" name="description" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="number" name="price" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <input class="form-control" type="file" id="image" name="image">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="number" name="quantity" class="form-control" required>
+                                    </div>
+                                    <!-- <div class="form-group">
+										<label>Category</label>
+										<select name="Category" class="form-control" required>
+											<option value="${Category_id}">${Category_name}</option>
+										</select>
+									</div> -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!----edit-modal end--------->
+
+
+
+
+
+                    <!----edit-modal start--------->
+                    <div class="modal fade" tabindex="-1" id="editEmployeeModal" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Edit Employees</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>description</label>
+                                        <input type="emil" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>price</label>
+                                        <textarea class="form-control" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>image</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>quantity</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!----edit-modal end--------->
+
+
+
+                    <!----edit-modal end--------->
+
+
+
+
+                </div>
+            </div>
+
+            <!------main-content-end----------->
+
+
+
+            <!----footer-design------------->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="footer-in">
+                        <p class="mb-0">&copy 2021 Vishweb Design . All Rights Reserved.</p>
+                    </div>
+                </div>
+            </footer>
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-------complete html----------->
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        async function deleteProduct() {
+            if (confirm("are you sure you want to delete?") == true) {
+                const checkedProductIds = Array.from(document.querySelectorAll("input[name='foo']:checked")).map(checkbox => checkbox.value);
+                await axios({
+                    method: "post",
+                    url: "http://localhost:3000/admin/delete-many",
+                    data: checkedProductIds
+                })
+                location.reload();
+            }
+
+        }
+        function toggle(source) {
+            checkboxes = document.getElementsByName('foo');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+        async function changePage(i) {
+            const { data: response } = await axios.put(`http://localhost:3000/admin?page=${i}`)
+            let html = ""
+            response.data.forEach((element, index) => {
+                html += `<tr>
+												<th><span class="custom-checkbox">
+														<input type="checkbox" id="checkbox1" name="foo"
+															value="${element._id}">
+														<label for="checkbox1"></label>
+												</th>
+												<th>
+													<img src="${element.image}" class="rounded shadow-sm"
+														style="width: 66px; height: 66px;">
+												</th>
+												<th>
+													${element.title}
+												</th>
+												<th style="max-width: 200px; display:inline-block ;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;"
+													class="pt-4">
+													${element.description}
+												</th>
+												<th>
+													${element.price.toLocaleString("it-IT", {
+                    style: "currency",
+                    currency: "VND",
+                })}
+												</th>
+												<th>
+													${element.quantity}
+												</th>
+												<th>
+													<a href="/admin/edit/${element._id}" class="edit" >
+														<i class="material-icons" data-toggle="tooltip"
+															title="Edit">&#xE254;</i>
+													</a>
+													<a href="/admin/delete/${element._id}"class="delete" >
+					<i class="material-icons" onclick = "return confirm('are you sure you want to delete?')">&#xE872;</i>
+													</a>
+												</th>
+											</tr> `
+            })
+            document.getElementById("products").innerHTML = html;
+        }
+        async function search() {
+            let values = document.getElementById("tags").value
+            const response = await axios.get(`http://localhost:3000/admin/search?title=${values}`)
+            let html = ""
+            response.data.forEach((element, index) => {
+                html += `<tr>
+												<th><span class="custom-checkbox">
+														<input type="checkbox" id="checkbox1" name="foo"
+															value="${element._id}">
+														<label for="checkbox1"></label>
+												</th>
+												<th>
+													<img src="${element.image}" class="rounded shadow-sm"
+														style="width: 66px; height: 66px;">
+												</th>
+												<th>
+													${element.title}
+												</th>
+												<th style="max-width: 200px; display:inline-block ;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;"
+													class="pt-4">
+													${element.description}
+												</th>
+												<th>
+													${element.price.toLocaleString("it-IT", {
+                    style: "currency",
+                    currency: "VND",
+                })}
+												</th>
+												<th>
+													${element.quantity}
+												</th>
+												<th>
+													<a href="/admin/edit/${element._id}" class="edit" >
+														<i class="material-icons" data-toggle="tooltip"
+															title="Edit">&#xE254;</i>
+													</a>
+													<a href="/admin/delete/${element._id}"class="delete" >
+					<i class="material-icons" onclick = "return confirm('are you sure you want to delete?')">&#xE872;</i>
+													</a>
+												</th>
+											</tr> `
+            })
+            document.getElementById("products").innerHTML = html;
+        }
+    </script>
+    <script>
+        $(function () {
+            $("#tags").autocomplete({
+                source: function (req, res) {
+                    $.ajax({
+                        url: "http://localhost:3000/admin/auto-complete",
+                        dataType: "jsonp",
+                        type: "GET",
+                        data: req,
+                        success: function (data) {
+                            res(data)
+                        },
+                        error: function (error) {
+                            console.log(error.status);
+                        }
+                    })
+                },
+                minLength: 1,
+                select: function (event, ui) {
+                    if (ui.item) {
+                        $("#tags").text(ui.item.label);
+                    }
+                }
+            });
+        })
+    </script>
+
+    <!-- Optional JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+        integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".xp-menubar").on('click', function () {
+                $("#sidebar").toggleClass('active');
+                $("#content").toggleClass('active');
+            });
+
+            $('.xp-menubar,.body-overlay').on('click', function () {
+                $("#sidebar,.body-overlay").toggleClass('show-nav');
+            });
+
+        });
+    </script>
+
+
+
+
+
+</body>
+
+</html>

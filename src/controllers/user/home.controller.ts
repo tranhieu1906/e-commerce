@@ -32,11 +32,17 @@ class HomeUser {
   }
   autocomplete(req, res) {
     let regex = new RegExp(req.query["term"], "i");
-    let productFilter = Product.find({ title: regex }, { title: 1 }, {quantity: { $gt: 0 }})
-      .sort({
-        createdAt: -1,
-      })
-      .limit(6);
+    // let productFilter = Product.find({ title: regex }, { title: 1 }, {quantity: { $gt: 0 }})
+    //   .sort({
+    //     createdAt: -1,
+    //   })
+    //   .limit(6);
+    let productFilter = Product.aggregate([
+      {$match: {title: {$regex: regex}, quantity: {$gt: 0}}},
+      {$sort: {createdAt: -1}},
+      {$limit: 6},
+      {$project: {title: 1, _id: 0}}
+    ])
     productFilter.exec((err, data) => {
       let result = [];
       if (!err) {

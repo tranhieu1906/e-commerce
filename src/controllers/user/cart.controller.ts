@@ -32,7 +32,7 @@ class Carts {
         });
       }
       await cart.save();
-      res.redirect(301, "/user/home");
+      res.redirect(301, "/");
     } catch (error) {
       res.status(500).send(error);
     }

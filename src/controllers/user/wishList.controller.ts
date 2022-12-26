@@ -18,7 +18,7 @@ export class WhiteList {
       }
     } catch (e) {
       console.log(e);
-      res.redirect(301, "/user/home");
+      res.redirect(301, "/");
     }
   }
   async addWishList(req, res) {

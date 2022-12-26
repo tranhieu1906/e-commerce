@@ -32,7 +32,7 @@ class Auth {
   LogOut(req, res) {
     res.clearCookie("login");
     res.clearCookie("idUser");
-    res.redirect(301, "/user/home");
+    res.redirect(301, "/");
   }
 
   async login(req, res, next) {
@@ -51,7 +51,7 @@ class Auth {
             maxAge: 1000 * 60 * 60 * 24,
             httpOnly: true,
           });
-          res.redirect(301, "/user/home");
+          res.redirect(301, "/");
         } else {
           res.redirect("/auth/login");
         }
@@ -71,7 +71,7 @@ class Auth {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
     });
-    res.redirect("/user/home");
+    res.redirect("/");
   }
   async loginGoogle(req, res, next) {
     try {
@@ -85,7 +85,7 @@ class Auth {
         maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
       });
-      res.redirect("/user/home");
+      res.redirect("/");
     } catch (err) {
       next(err);
     }

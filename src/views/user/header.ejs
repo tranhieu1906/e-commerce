@@ -1,0 +1,367 @@
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<header>
+    <!-- Top-Header -->
+    <div class="full-layer-outer-header">
+        <div class="container clearfix">
+            <nav>
+                <ul class="primary-nav g-nav">
+                    <li>
+                        <a href="tel:+111444989">
+                            <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
+                            Telephone:0342237221</a>
+                    </li>
+                    <li>
+                        <a href="mailto:nguyentranhieugttn@gmail.com">
+                            <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
+                            E-mail: nguyentranhieugttn@gmail.com
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <nav>
+                <ul class="secondary-nav g-nav">
+                    <li>
+                        <a>My Account
+                            <i class="fas fa-chevron-down u-s-m-l-9"></i>
+                        </a>
+                        <ul class="g-dropdown" style="width:200px">
+                            <li>
+                                <a href="/user/cart">
+                                    <i class="fas fa-cog u-s-m-r-9"></i>
+                                    My Cart</a>
+                            </li>
+                            <li>
+                                <a href="/user/wish-list">
+                                    <i class="far fa-heart u-s-m-r-9"></i>
+                                    My Wishlist</a>
+                            </li>
+                            <li>
+                                <a href="/user/check-out">
+                                    <i class="far fa-check-circle u-s-m-r-9"></i>
+                                    Checkout</a>
+                            </li>
+                            <li>
+                                <% if(login){ %>
+                                    <a href="/auth/logout">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        LogOut</a>
+                                    <% }else{ %>
+                                        <a href="/auth/login">
+                                            <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                            Login</a>
+                                        <% } %>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- Top-Header /- -->
+    <!-- Mid-Header -->
+    <div class="full-layer-mid-header">
+        <div class="container">
+            <div class="row clearfix align-items-center">
+                <div class="col-lg-3 col-md-9 col-sm-6">
+                    <div class="brand-logo text-lg-center">
+                        <a href="/">
+                            <img src="/images/main-logo/groover-branding-1.png" alt="Groover Brand Logo"
+                                class="app-brand-logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 u-d-none-lg">
+                    <form class="form-searchbox">
+                        <label class="sr-only" for="search-landscape">Search</label>
+                        <input id="search-landscapes" type="text" class="text-field" placeholder="Search everything">
+                        <div class="select-box-position">
+                            <div class="select-box-wrapper select-hide">
+                                <label class="sr-only" for="select-category">Choose category for search</label>
+                                <select class="select-box" id="select-category">
+                                    <option selected="selected" value="">
+                                        All
+                                    </option>
+                                    <option value="">Men's Clothing</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button id="btn-search" type="button" class="button button-primary fas fa-search" style="transform: translateY(-50%);" onclick="searchProduct()">
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-6">
+                    <nav>
+                        <ul class="mid-nav g-nav">
+                            <li class="u-d-none-lg">
+                                <a href="">
+                                    <i class="ion ion-md-home u-c-brand"></i>
+                                </a>
+                            </li>
+                            <li class="u-d-none-lg">
+                                <a href="/user/wish-list">
+                                    <i class="far fa-heart"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="mini-cart-trigger" <%- `onclick="showCart('${idUser}')"`  %>  >
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mid-Header /- -->
+    <!-- Responsive-Buttons -->
+    <div class="fixed-responsive-container">
+        <div class="fixed-responsive-wrapper">
+            <button type="button" class="button fas fa-search" id="responsive-search"></button>
+        </div>
+        <div class="fixed-responsive-wrapper">
+            <a href="/user/wish-list">
+                <i class="far fa-heart"></i>
+                <span class="fixed-item-counter">4</span>
+            </a>
+        </div>
+    </div>
+    <!-- Responsive-Buttons /- -->
+    <!-- Mini Cart -->
+    <div class="mini-cart-wrapper">
+        <div class="mini-cart">
+            <div class="mini-cart-header">
+                YOUR CART
+                <button type="button" class="button ion ion-md-close" id="mini-cart-close"></button>
+            </div>
+            <ul class="mini-cart-list" id="list-cart">
+            </ul>
+            <div class="mini-shop-total clearfix" id="total-cart">
+            </div>
+            <div class="mini-action-anchors">
+                <a href="/user/cart" class="cart-anchor">View Cart</a>
+                <a href="/user/check-out" class="checkout-anchor">Checkout</a>
+            </div>
+        </div>
+    </div>
+    <!-- Mini Cart /- -->
+    <!-- Bottom-Header -->
+    <div class="full-layer-bottom-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3">
+                    <div class="v-menu v-close">
+                        <span class="v-title">
+                            <i class="ion ion-md-menu"></i>
+                            All Categories
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                        <nav>
+                            <div class="v-wrapper">
+                                <ul class="v-list animated fadeIn">
+                                    <li class="js-backdrop">
+                                        <a href="/user/shop-v1">
+                                            <i class="ion ion-md-shirt"></i>
+                                            Men's Clothing
+                                            <i class="ion ion-ios-arrow-forward"></i>
+                                        </a>
+                                        <button class="v-button ion ion-md-add"></button>
+                                        <div class="v-drop-right" style="width: 700px;">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <ul class="v-level-2">
+                                                        <li>
+                                                            <a href="shop-v2-sub-category.html">Tops</a>
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">T-Shirts</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Hoodies</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Suits</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v4-filter-as-category.html">Black Bean
+                                                                        T-Shirt
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <ul class="v-level-2">
+                                                        <li>
+                                                            <a href="shop-v2-sub-category.html">Outwear</a>
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Jackets</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Trench</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Parkas</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Sweaters</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <ul class="v-level-2">
+                                                        <li>
+                                                            <a href="/user/shop-v1">Accessories</a>
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Watches</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Ties</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Scarves</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Belts</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <ul class="v-level-2">
+                                                        <li>
+                                                            <a href="shop-v2-sub-category.html">Bottoms</a>
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Casual Pants
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Shoes</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Jeans</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Shorts</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <ul class="v-level-2">
+                                                        <li>
+                                                            <a href="shop-v2-sub-category.html">Underwear</a>
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Boxers</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Briefs</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Robes</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Socks</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <ul class="v-level-2">
+                                                        <li>
+                                                            <a href="shop-v2-sub-category.html">Sunglasses</a>
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Pilot</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Wayfarer</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Square</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="shop-v3-sub-sub-category.html">Round</a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <ul class="bottom-nav g-nav u-d-none-lg">
+                        <li>
+                            <a href="custom-deal-page.html">New Arrivals
+                                <span class="superscript-label-new">NEW</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="custom-deal-page.html">Exclusive Deals
+                                <span class="superscript-label-hot">HOT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="custom-deal-page.html">Flash Deals
+                            </a>
+                        </li>
+                        <li>
+                            <a href="custom-deal-page.html">Super Sale
+                                <span class="superscript-label-discount">-15%</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bottom-Header /- -->
+</header>
+<script src="/js/cart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#search-landscapes").autocomplete({
+            source: function (req, res) {
+                $.ajax({
+                    url: "http://localhost:3000/user/auto-complete",
+                    dataType: "jsonp",
+                    type: "GET",
+                    data: req,
+                    success: function (data) {
+                        res(data)
+                    },
+                    error: function (error) {
+                        console.log(error.status);
+                    }
+                })
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                if (ui.item) {
+                    $("#search-landscapes").text(ui.item.label);
+                }
+            }
+        });
+    })
+</script>
